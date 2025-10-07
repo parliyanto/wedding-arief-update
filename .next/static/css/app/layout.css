@@ -1,6 +1,6 @@
-/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/app/globals.css ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!../node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./src/app/globals.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
 /*! tailwindcss v4.1.13 | MIT License | https://tailwindcss.com */
 @layer properties;
 @layer theme, base, components, utilities;
@@ -8,18 +8,9 @@
   :root, :host {
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     --color-pink-600: oklch(59.2% 0.249 0.584);
-<<<<<<< HEAD
-    --color-pink-800: oklch(45.9% 0.187 3.815);
-    --color-gray-50: oklch(98.5% 0.002 247.839);
-    --color-gray-100: oklch(96.7% 0.003 264.542);
-=======
     --color-pink-700: oklch(52.5% 0.223 3.958);
-    --color-pink-800: oklch(45.9% 0.187 3.815);
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
-    --color-gray-200: oklch(92.8% 0.006 264.531);
-    --color-gray-300: oklch(87.2% 0.01 258.338);
->>>>>>> 8e5a35a3 (first commit)
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
     --color-gray-600: oklch(44.6% 0.03 256.802);
@@ -54,16 +45,9 @@
     --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
-<<<<<<< HEAD
-=======
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
-    --text-8xl: 6rem;
-    --text-8xl--line-height: 1;
-    --text-9xl: 8rem;
-    --text-9xl--line-height: 1;
     --font-weight-normal: 400;
->>>>>>> 8e5a35a3 (first commit)
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
@@ -76,11 +60,8 @@
     --radius-2xl: 1rem;
     --drop-shadow-md: 0 3px 3px rgb(0 0 0 / 0.12);
     --drop-shadow-lg: 0 4px 4px rgb(0 0 0 / 0.15);
-<<<<<<< HEAD
-=======
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
->>>>>>> 8e5a35a3 (first commit)
     --blur-md: 12px;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -258,24 +239,18 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
-<<<<<<< HEAD
-=======
   .right-6 {
     right: calc(var(--spacing) * 6);
   }
->>>>>>> 8e5a35a3 (first commit)
   .-bottom-20 {
     bottom: calc(var(--spacing) * -20);
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
   }
-<<<<<<< HEAD
-=======
   .bottom-6 {
     bottom: calc(var(--spacing) * 6);
   }
->>>>>>> 8e5a35a3 (first commit)
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
@@ -285,17 +260,6 @@
   .-z-10 {
     z-index: calc(10 * -1);
   }
-<<<<<<< HEAD
-  .z-5 {
-    z-index: 5;
-  }
-  .z-10 {
-    z-index: 10;
-  }
-  .z-50 {
-    z-index: 50;
-  }
-=======
   .z-10 {
     z-index: 10;
   }
@@ -308,7 +272,6 @@
   .z-\[9999\] {
     z-index: 9999;
   }
->>>>>>> 8e5a35a3 (first commit)
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -336,21 +299,15 @@
   .my-2 {
     margin-block: calc(var(--spacing) * 2);
   }
-  .my-6 {
-    margin-block: calc(var(--spacing) * 6);
-  }
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
   }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
-<<<<<<< HEAD
-=======
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
->>>>>>> 8e5a35a3 (first commit)
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
@@ -390,12 +347,9 @@
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
   }
-<<<<<<< HEAD
-=======
   .ml-1 {
     margin-left: calc(var(--spacing) * 1);
   }
->>>>>>> 8e5a35a3 (first commit)
   .block {
     display: block;
   }
@@ -414,11 +368,6 @@
   .h-0 {
     height: calc(var(--spacing) * 0);
   }
-<<<<<<< HEAD
-  .h-12 {
-    height: calc(var(--spacing) * 12);
-  }
-=======
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
@@ -428,19 +377,12 @@
   .h-14 {
     height: calc(var(--spacing) * 14);
   }
->>>>>>> 8e5a35a3 (first commit)
   .h-36 {
     height: calc(var(--spacing) * 36);
   }
   .h-48 {
     height: calc(var(--spacing) * 48);
   }
-<<<<<<< HEAD
-=======
-  .h-50 {
-    height: calc(var(--spacing) * 50);
-  }
->>>>>>> 8e5a35a3 (first commit)
   .h-60 {
     height: calc(var(--spacing) * 60);
   }
@@ -468,11 +410,6 @@
   .min-h-screen {
     min-height: 100vh;
   }
-<<<<<<< HEAD
-  .w-12 {
-    width: calc(var(--spacing) * 12);
-  }
-=======
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
@@ -482,22 +419,12 @@
   .w-14 {
     width: calc(var(--spacing) * 14);
   }
->>>>>>> 8e5a35a3 (first commit)
   .w-36 {
     width: calc(var(--spacing) * 36);
-  }
-  .w-40 {
-    width: calc(var(--spacing) * 40);
-  }
-<<<<<<< HEAD
-=======
-  .w-50 {
-    width: calc(var(--spacing) * 50);
   }
   .w-56 {
     width: calc(var(--spacing) * 56);
   }
->>>>>>> 8e5a35a3 (first commit)
   .w-64 {
     width: calc(var(--spacing) * 64);
   }
@@ -529,15 +456,12 @@
     --tw-translate-x: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
-<<<<<<< HEAD
-=======
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
   .animate-pulse {
     animation: var(--animate-pulse);
   }
->>>>>>> 8e5a35a3 (first commit)
   .cursor-pointer {
     cursor: pointer;
   }
@@ -663,41 +587,20 @@
   .border-black {
     border-color: var(--color-black);
   }
-<<<<<<< HEAD
-=======
-  .border-gray-300\/60 {
-    border-color: color-mix(in srgb, oklch(87.2% 0.01 258.338) 60%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      border-color: color-mix(in oklab, var(--color-gray-300) 60%, transparent);
-    }
-  }
->>>>>>> 8e5a35a3 (first commit)
   .border-gray-400 {
     border-color: var(--color-gray-400);
   }
   .border-white {
     border-color: var(--color-white);
   }
-<<<<<<< HEAD
-  .bg-\[\#4f5766\] {
-    background-color: #4f5766;
-  }
-=======
   .border-white\/40 {
     border-color: color-mix(in srgb, #fff 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       border-color: color-mix(in oklab, var(--color-white) 40%, transparent);
     }
   }
-  .bg-\[\#4f5766\] {
-    background-color: #4f5766;
-  }
   .bg-\[\#7b8994\] {
     background-color: #7b8994;
-  }
->>>>>>> 8e5a35a3 (first commit)
-  .bg-\[\#353940\] {
-    background-color: #353940;
   }
   .bg-\[\#444952\] {
     background-color: #444952;
@@ -709,12 +612,6 @@
     background-color: color-mix(in srgb, #000 30%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 30%, transparent);
-    }
-  }
-  .bg-black\/40 {
-    background-color: color-mix(in srgb, #000 40%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-black) 40%, transparent);
     }
   }
   .bg-black\/50 {
@@ -729,17 +626,6 @@
   .bg-gray-100 {
     background-color: var(--color-gray-100);
   }
-<<<<<<< HEAD
-  .bg-gray-400 {
-    background-color: var(--color-gray-400);
-  }
-=======
-  .bg-gray-200\/20 {
-    background-color: color-mix(in srgb, oklch(92.8% 0.006 264.531) 20%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-gray-200) 20%, transparent);
-    }
-  }
   .bg-gray-400 {
     background-color: var(--color-gray-400);
   }
@@ -749,7 +635,6 @@
       background-color: color-mix(in oklab, var(--color-gray-400) 30%, transparent);
     }
   }
->>>>>>> 8e5a35a3 (first commit)
   .bg-gray-400\/60 {
     background-color: color-mix(in srgb, oklch(70.7% 0.022 261.325) 60%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -765,46 +650,33 @@
   .bg-gray-700 {
     background-color: var(--color-gray-700);
   }
-<<<<<<< HEAD
-  .bg-gray-700\/60 {
-    background-color: color-mix(in srgb, oklch(37.3% 0.034 259.733) 60%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-gray-700) 60%, transparent);
-=======
   .bg-gray-700\/70 {
     background-color: color-mix(in srgb, oklch(37.3% 0.034 259.733) 70%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-gray-700) 70%, transparent);
->>>>>>> 8e5a35a3 (first commit)
     }
   }
   .bg-gray-800 {
     background-color: var(--color-gray-800);
   }
-<<<<<<< HEAD
-=======
   .bg-pink-600\/80 {
     background-color: color-mix(in srgb, oklch(59.2% 0.249 0.584) 80%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-pink-600) 80%, transparent);
     }
   }
->>>>>>> 8e5a35a3 (first commit)
   .bg-transparent {
     background-color: transparent;
   }
   .bg-white {
     background-color: var(--color-white);
   }
-<<<<<<< HEAD
-=======
   .bg-white\/20 {
     background-color: color-mix(in srgb, #fff 20%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
     }
   }
->>>>>>> 8e5a35a3 (first commit)
   .bg-white\/30 {
     background-color: color-mix(in srgb, #fff 30%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -843,13 +715,6 @@
     --tw-gradient-position: to right in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
-<<<<<<< HEAD
-  .from-gray-800 {
-    --tw-gradient-from: var(--color-gray-800);
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-=======
->>>>>>> 8e5a35a3 (first commit)
   .from-white\/70 {
     --tw-gradient-from: color-mix(in srgb, #fff 70%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -865,13 +730,6 @@
     --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
   }
-<<<<<<< HEAD
-  .to-black {
-    --tw-gradient-to: var(--color-black);
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-=======
->>>>>>> 8e5a35a3 (first commit)
   .to-white\/80 {
     --tw-gradient-to: color-mix(in srgb, #fff 80%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -901,12 +759,6 @@
   .object-cover {
     object-fit: cover;
   }
-<<<<<<< HEAD
-=======
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
-  }
->>>>>>> 8e5a35a3 (first commit)
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -919,12 +771,9 @@
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
-<<<<<<< HEAD
-=======
   .p-\[6px\] {
     padding: 6px;
   }
->>>>>>> 8e5a35a3 (first commit)
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
   }
@@ -983,17 +832,10 @@
     font-size: var(--text-5xl);
     line-height: var(--tw-leading, var(--text-5xl--line-height));
   }
-<<<<<<< HEAD
-=======
   .text-6xl {
     font-size: var(--text-6xl);
     line-height: var(--tw-leading, var(--text-6xl--line-height));
   }
-  .text-9xl {
-    font-size: var(--text-9xl);
-    line-height: var(--tw-leading, var(--text-9xl--line-height));
-  }
->>>>>>> 8e5a35a3 (first commit)
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -1014,13 +856,10 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
-<<<<<<< HEAD
-=======
   .leading-none {
     --tw-leading: 1;
     line-height: 1;
   }
->>>>>>> 8e5a35a3 (first commit)
   .leading-relaxed {
     --tw-leading: var(--leading-relaxed);
     line-height: var(--leading-relaxed);
@@ -1033,13 +872,10 @@
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
   }
-<<<<<<< HEAD
-=======
   .font-normal {
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
   }
->>>>>>> 8e5a35a3 (first commit)
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
@@ -1052,12 +888,9 @@
     --tw-tracking: var(--tracking-widest);
     letter-spacing: var(--tracking-widest);
   }
-<<<<<<< HEAD
-=======
   .text-\[\#ffb5b5\] {
     color: #ffb5b5;
   }
->>>>>>> 8e5a35a3 (first commit)
   .text-black {
     color: var(--color-black);
   }
@@ -1076,9 +909,6 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
-  .text-pink-600 {
-    color: var(--color-pink-600);
-  }
   .text-white {
     color: var(--color-white);
   }
@@ -1088,12 +918,9 @@
   .italic {
     font-style: italic;
   }
-<<<<<<< HEAD
-=======
   .opacity-5 {
     opacity: 5%;
   }
->>>>>>> 8e5a35a3 (first commit)
   .opacity-20 {
     opacity: 20%;
   }
@@ -1103,12 +930,9 @@
   .opacity-80 {
     opacity: 80%;
   }
-<<<<<<< HEAD
-=======
   .mix-blend-multiply {
     mix-blend-mode: multiply;
   }
->>>>>>> 8e5a35a3 (first commit)
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -1121,13 +945,6 @@
     --tw-shadow: -8px 0 20px var(--tw-shadow-color, rgba(0,0,0,0.5));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-<<<<<<< HEAD
-=======
-  .shadow-inner {
-    --tw-shadow: inset 0 2px 4px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
->>>>>>> 8e5a35a3 (first commit)
   .shadow-lg {
     --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -1146,12 +963,6 @@
     --tw-drop-shadow: drop-shadow(var(--drop-shadow-md));
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
-<<<<<<< HEAD
-=======
-  .filter {
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-  }
->>>>>>> 8e5a35a3 (first commit)
   .backdrop-blur-md {
     --tw-backdrop-blur: blur(var(--blur-md));
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
@@ -1162,14 +973,11 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
-<<<<<<< HEAD
-=======
   .transition-all {
     transition-property: all;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
->>>>>>> 8e5a35a3 (first commit)
   .transition-opacity {
     transition-property: opacity;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -1184,19 +992,14 @@
     --tw-duration: 0ms;
     transition-duration: 0ms;
   }
-<<<<<<< HEAD
-=======
   .duration-200 {
     --tw-duration: 200ms;
     transition-duration: 200ms;
   }
->>>>>>> 8e5a35a3 (first commit)
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
   }
-<<<<<<< HEAD
-=======
   .duration-500 {
     --tw-duration: 500ms;
     transition-duration: 500ms;
@@ -1205,7 +1008,6 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
->>>>>>> 8e5a35a3 (first commit)
   .select-none {
     -webkit-user-select: none;
     user-select: none;
@@ -1220,8 +1022,6 @@
       }
     }
   }
-<<<<<<< HEAD
-=======
   .hover\:scale-110 {
     &:hover {
       @media (hover: hover) {
@@ -1232,7 +1032,6 @@
       }
     }
   }
->>>>>>> 8e5a35a3 (first commit)
   .hover\:bg-gray-600 {
     &:hover {
       @media (hover: hover) {
@@ -1247,8 +1046,6 @@
       }
     }
   }
-<<<<<<< HEAD
-=======
   .hover\:bg-gray-800\/80 {
     &:hover {
       @media (hover: hover) {
@@ -1259,7 +1056,6 @@
       }
     }
   }
->>>>>>> 8e5a35a3 (first commit)
   .hover\:bg-gray-900 {
     &:hover {
       @media (hover: hover) {
@@ -1267,8 +1063,6 @@
       }
     }
   }
-<<<<<<< HEAD
-=======
   .hover\:bg-pink-700\/90 {
     &:hover {
       @media (hover: hover) {
@@ -1276,14 +1070,6 @@
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-pink-700) 90%, transparent);
         }
-      }
-    }
-  }
->>>>>>> 8e5a35a3 (first commit)
-  .hover\:text-pink-800 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-pink-800);
       }
     }
   }
@@ -1302,14 +1088,11 @@
       width: calc(var(--spacing) * 40);
     }
   }
-<<<<<<< HEAD
-=======
   .sm\:w-72 {
     @media (width >= 40rem) {
       width: calc(var(--spacing) * 72);
     }
   }
->>>>>>> 8e5a35a3 (first commit)
   .sm\:gap-8 {
     @media (width >= 40rem) {
       gap: calc(var(--spacing) * 8);
@@ -1337,15 +1120,12 @@
       line-height: var(--tw-leading, var(--text-5xl--line-height));
     }
   }
-<<<<<<< HEAD
-=======
   .sm\:text-6xl {
     @media (width >= 40rem) {
       font-size: var(--text-6xl);
       line-height: var(--tw-leading, var(--text-6xl--line-height));
     }
   }
->>>>>>> 8e5a35a3 (first commit)
   .sm\:text-lg {
     @media (width >= 40rem) {
       font-size: var(--text-lg);
@@ -1367,24 +1147,11 @@
       width: calc(var(--spacing) * 44);
     }
   }
-<<<<<<< HEAD
-=======
-  .md\:w-50 {
-    @media (width >= 48rem) {
-      width: calc(var(--spacing) * 50);
-    }
-  }
   .md\:w-80 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 80);
     }
   }
-  .md\:w-96 {
-    @media (width >= 48rem) {
-      width: calc(var(--spacing) * 96);
-    }
-  }
->>>>>>> 8e5a35a3 (first commit)
   .md\:grid-cols-\[65\%_35\%\] {
     @media (width >= 48rem) {
       grid-template-columns: 65% 35%;
@@ -1402,12 +1169,6 @@
       line-height: var(--tw-leading, var(--text-3xl--line-height));
     }
   }
-  .md\:text-4xl {
-    @media (width >= 48rem) {
-      font-size: var(--text-4xl);
-      line-height: var(--tw-leading, var(--text-4xl--line-height));
-    }
-  }
   .md\:text-5xl {
     @media (width >= 48rem) {
       font-size: var(--text-5xl);
@@ -1420,27 +1181,12 @@
       line-height: var(--tw-leading, var(--text-6xl--line-height));
     }
   }
-<<<<<<< HEAD
-=======
   .md\:text-7xl {
     @media (width >= 48rem) {
       font-size: var(--text-7xl);
       line-height: var(--tw-leading, var(--text-7xl--line-height));
     }
   }
-  .md\:text-8xl {
-    @media (width >= 48rem) {
-      font-size: var(--text-8xl);
-      line-height: var(--tw-leading, var(--text-8xl--line-height));
-    }
-  }
-  .md\:text-9xl {
-    @media (width >= 48rem) {
-      font-size: var(--text-9xl);
-      line-height: var(--tw-leading, var(--text-9xl--line-height));
-    }
-  }
->>>>>>> 8e5a35a3 (first commit)
   .md\:text-base {
     @media (width >= 48rem) {
       font-size: var(--text-base);
@@ -1459,49 +1205,11 @@
       line-height: var(--tw-leading, var(--text-xl--line-height));
     }
   }
-<<<<<<< HEAD
-=======
-  .lg\:w-\[28rem\] {
-    @media (width >= 64rem) {
-      width: 28rem;
-    }
-  }
-  .lg\:w-\[50\] {
-    @media (width >= 64rem) {
-      width: 50;
-    }
-  }
-  .lg\:w-\[50px\] {
-    @media (width >= 64rem) {
-      width: 50px;
-    }
-  }
-  .lg\:w-\[70px\] {
-    @media (width >= 64rem) {
-      width: 70px;
-    }
-  }
-  .lg\:w-\[80\] {
-    @media (width >= 64rem) {
-      width: 80;
-    }
-  }
-  .lg\:w-\[100\] {
-    @media (width >= 64rem) {
-      width: 100;
-    }
-  }
   .lg\:w-\[250px\] {
     @media (width >= 64rem) {
       width: 250px;
     }
   }
-  .lg\:w-\[300px\] {
-    @media (width >= 64rem) {
-      width: 300px;
-    }
-  }
->>>>>>> 8e5a35a3 (first commit)
 }
 :root {
   --background: #ffffff;
@@ -1518,8 +1226,6 @@ body {
   color: var(--foreground);
   font-family: 'Playfair Display', serif;
 }
-<<<<<<< HEAD
-=======
 @font-face {
   font-family: "Bailenson";
   src: url("/fonts/Bailenson.ttf") format("truetype");
@@ -1527,7 +1233,6 @@ body {
   font-weight: 500;
   line-height: 60px;
 }
->>>>>>> 8e5a35a3 (first commit)
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
@@ -1543,8 +1248,6 @@ body {
   inherits: false;
   initial-value: 0;
 }
-<<<<<<< HEAD
-=======
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -1565,7 +1268,6 @@ body {
   syntax: "*";
   inherits: false;
 }
->>>>>>> 8e5a35a3 (first commit)
 @property --tw-space-y-reverse {
   syntax: "*";
   inherits: false;
@@ -1788,13 +1490,10 @@ body {
   syntax: "*";
   inherits: false;
 }
-<<<<<<< HEAD
-=======
 @property --tw-ease {
   syntax: "*";
   inherits: false;
 }
->>>>>>> 8e5a35a3 (first commit)
 @property --tw-scale-x {
   syntax: "*";
   inherits: false;
@@ -1810,28 +1509,22 @@ body {
   inherits: false;
   initial-value: 1;
 }
-<<<<<<< HEAD
-=======
 @keyframes pulse {
   50% {
     opacity: 0.5;
   }
 }
->>>>>>> 8e5a35a3 (first commit)
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
-<<<<<<< HEAD
-=======
       --tw-rotate-x: initial;
       --tw-rotate-y: initial;
       --tw-rotate-z: initial;
       --tw-skew-x: initial;
       --tw-skew-y: initial;
->>>>>>> 8e5a35a3 (first commit)
       --tw-space-y-reverse: 0;
       --tw-border-style: solid;
       --tw-gradient-position: initial;
@@ -1883,10 +1576,7 @@ body {
       --tw-backdrop-saturate: initial;
       --tw-backdrop-sepia: initial;
       --tw-duration: initial;
-<<<<<<< HEAD
-=======
       --tw-ease: initial;
->>>>>>> 8e5a35a3 (first commit)
       --tw-scale-x: 1;
       --tw-scale-y: 1;
       --tw-scale-z: 1;
