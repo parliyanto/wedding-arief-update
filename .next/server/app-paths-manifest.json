@@ -1,0 +1,8 @@
+{
+<<<<<<< HEAD
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+=======
+>>>>>>> 8e5a35a3 (first commit)
+  "/page": "app/page.js"
+}
