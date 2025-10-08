@@ -192,8 +192,12 @@ const [copied, setCopied] = useState<string | null>(null);
               autoPlay
               muted
               playsInline
-              preload="metadata"   // biar ga buffer seluruh video dulu
-              poster="/cover-placeholder.jpg" // tampilkan gambar dulu sebelum video siap
+              onTimeUpdate={(e) => {
+              const video = e.currentTarget as HTMLVideoElement; // ✅ kasih tau TS
+              if (video.currentTime >= 15 && !showText) {
+                setShowText(true);
+              }
+            }}
             ></video>
 
             <div className="absolute inset-0"></div>
