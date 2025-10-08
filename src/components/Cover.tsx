@@ -53,8 +53,6 @@ export default function Cover({ onOpen }: CoverProps) {
           Open Invitation
         </button>
       </div>
-
-
     </section>
   );
 }

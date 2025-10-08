@@ -7,6 +7,7 @@
 @layer theme {
   :root, :host {
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --color-green-500: oklch(72.3% 0.219 149.579);
     --color-pink-600: oklch(59.2% 0.249 0.584);
     --color-pink-700: oklch(52.5% 0.223 3.958);
     --color-gray-50: oklch(98.5% 0.002 247.839);
@@ -60,6 +61,7 @@
     --radius-2xl: 1rem;
     --drop-shadow-md: 0 3px 3px rgb(0 0 0 / 0.12);
     --drop-shadow-lg: 0 4px 4px rgb(0 0 0 / 0.15);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --blur-md: 12px;
@@ -239,6 +241,9 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
   .right-6 {
     right: calc(var(--spacing) * 6);
   }
@@ -247,6 +252,9 @@
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
+  }
+  .bottom-5 {
+    bottom: calc(var(--spacing) * 5);
   }
   .bottom-6 {
     bottom: calc(var(--spacing) * 6);
@@ -659,6 +667,9 @@
   .bg-gray-800 {
     background-color: var(--color-gray-800);
   }
+  .bg-green-500 {
+    background-color: var(--color-green-500);
+  }
   .bg-pink-600\/80 {
     background-color: color-mix(in srgb, oklch(59.2% 0.249 0.584) 80%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1003,6 +1014,10 @@
   .duration-500 {
     --tw-duration: 500ms;
     transition-duration: 500ms;
+  }
+  .ease-in {
+    --tw-ease: var(--ease-in);
+    transition-timing-function: var(--ease-in);
   }
   .ease-in-out {
     --tw-ease: var(--ease-in-out);

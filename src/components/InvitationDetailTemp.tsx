@@ -46,12 +46,11 @@ const [wishes, setWishes] = useState<Wish[]>([]);
   
  
 
-    // Fetch wishes saat load
+    // Fetch wishes saat load 
     useEffect(() => {
-        setMounted(true); // ✅ only render client
-          if (!mounted) return;
-        fetchWishes();
-      }, []);
+    setMounted(true);
+    fetchWishes(); // langsung fetch sekali
+  }, []);
 
   const fetchWishes = async () => {
     const { data } = await supabase
@@ -114,6 +113,7 @@ useEffect(() => {
   const audio = new Audio("/backsound.mp3");
   audio.loop = true;
   audio.volume = 0.5;
+  audio.currentTime = 48;
   audioRef.current = audio;
 
   // Mulai otomatis (kalau user udah interaksi di browser)
@@ -136,9 +136,35 @@ const togglePlay = () => {
     audioRef.current.pause();
   } else {
     audioRef.current.play();
+    // setiap kali play manual, pastikan tetap dati 48 detik kalau baru pertama kali
+    if (audioRef.current.currentTime < 48) {
+      audioRef.current.currentTime = 48;
+    }
+    audioRef.current.play();
   }
   setIsPlaying(!isPlaying);
 };
+
+
+// state buat copy alert cantik
+const [copied, setCopied] = useState<string | null>(null);
+
+  const handleCopy = async (bank: string) => {
+    const match = bank.match(/\d+/g);
+    const accountNumber = match ? match.join("") : bank.trim();
+
+    try {
+      await navigator.clipboard.writeText(accountNumber);
+      setCopied(accountNumber);
+
+      // hilang otomatis setelah 2 detik
+      setTimeout(() => setCopied(null), 2000);
+    } catch (err) {
+      console.error("copy failed", err);
+      setCopied("Gagal copy");
+    }
+  };
+
 
 
 
@@ -166,12 +192,8 @@ const togglePlay = () => {
               autoPlay
               muted
               playsInline
-              onTimeUpdate={(e) => {
-              const video = e.currentTarget as HTMLVideoElement; // ✅ kasih tau TS
-              if (video.currentTime >= 15 && !showText) {
-                setShowText(true);
-              }
-            }}
+              preload="metadata"   // biar ga buffer seluruh video dulu
+              poster="/cover-placeholder.jpg" // tampilkan gambar dulu sebelum video siap
             ></video>
 
             <div className="absolute inset-0"></div>
@@ -183,13 +205,17 @@ const togglePlay = () => {
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="relative z-10 flex flex-col items-center text-center text-white px-6"
               >
-                <p className="uppercase tracking-widest text-sm md:text-base mb-4">
+                <p className="uppercase tracking-widest text-base md:text-lg mb-4">
                   The Wedding of
                 </p>
-                <h1 className="text-4xl md:text-6xl font-serif italic">Asri</h1>
-                <span className="text-lg md:text-xl my-2">and</span>
-                <h1 className="text-4xl md:text-6xl font-serif italic">Arief</h1>
-                <p className="mt-6 text-lg md:text-xl tracking-wide">07 · 12 · 25</p>
+
+                <h1 className="text-5xl md:text-7xl font-serif italic">Asri</h1>
+
+                <span className="text-xl md:text-2xl my-2">and</span>
+
+                <h1 className="text-5xl md:text-7xl font-serif italic">Arief</h1>
+
+                <p className="mt-6 text-xl md:text-2xl tracking-wide">07 · 12 · 25</p>
 
                 <motion.div
                   onClick={handleScrollDown}
@@ -474,14 +500,17 @@ const togglePlay = () => {
               transition={{ duration: 0.3, ease: "easeOut", delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div className="w-full pb-[56.25%] h-0 overflow-hidden rounded-2xl shadow-lg mt-5 mb-10">
-                <iframe
-                  className="absolute top-0 left-0 w-full h-full rounded-2xl mb-10"
-                  src="weddingvideo3.mp4"
-                  title="Teaser Video"
-                  allow="autoplay"
-                  allowFullScreen
-                ></iframe>
+               <div className="w-full pb-[56.25%] h-0 overflow-hidden rounded-2xl shadow-lg mt-5 mb-10 relative">
+                <video
+                  className="absolute top-0 left-0 w-full h-full rounded-2xl"
+                  src="/weddingvideo3.mp4"
+                  controls
+                  playsInline
+                  preload="none"
+                  // ❌ autoplay dan muted dihapus supaya tidak langsung main
+                  // autoplay
+                  // muted
+                />
               </div>
             </motion.div>
 
@@ -697,7 +726,7 @@ const togglePlay = () => {
                 </p>
 
                 {/* 🔥 List rekening */}
-                <div className="space-y-3 text-left">
+                <div className="space-y-3 text-left relative">
                   {[
                     { name: "Asri Cikita Putri", bank: "BCA 5771426574" },
                     { name: "Arief Rachman Nugraha", bank: "BCA 4670089164" },
@@ -710,17 +739,70 @@ const togglePlay = () => {
                         <p className="font-medium text-gray-800">{item.name}</p>
                         <p className="text-sm text-gray-600">{item.bank}</p>
                       </div>
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(item.bank);
-                          alert(`${item.bank} copied!`);
-                        }}
-                        className="bg-gray-400 text-white px-3 py-1 rounded-md text-sm hover:bg-gray-600 transition"
-                      >
-                        Copy
-                      </button>
+                       <button
+                          onClick={async () => {
+                            // ambil hanya angka (menghapus 'BCA' atau teks lain)
+                            const match = item.bank.match(/\d+/g);
+                            const accountNumber = match ? match.join("") : item.bank.trim();
+
+                            // safe clipboard write
+                            try {
+                              if (navigator.clipboard && navigator.clipboard.writeText) {
+                                await navigator.clipboard.writeText(accountNumber);
+                              } else {
+                                // fallback (older browsers) - create temporary textarea
+                                const ta = document.createElement("textarea");
+                                ta.value = accountNumber;
+                                document.body.appendChild(ta);
+                                ta.select();
+                                document.execCommand("copy");
+                                document.body.removeChild(ta);
+                              }
+                              // ✅ Notifikasi cantik, bukan alert
+                                setCopied(accountNumber);
+                                setTimeout(() => setCopied(null), 2000);
+                              } catch (err) {
+                                console.error("copy failed", err);
+                                setCopied("Gagal copy");
+                              }
+                          }}
+                          className="bg-gray-400 text-white px-3 py-1 rounded-md text-sm hover:bg-gray-600 transition"
+                          aria-label={`Copy rekening ${item.name}`}
+                        >
+                          Copy
+                        </button>
                     </div>
                   ))}
+
+                  {/* ✨ Notifikasi cantik */}
+                      {copied && (
+                        <div className="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-up">
+                          ✅ {copied === "Gagal copy" ? copied : "Nomor rekening berhasil disalin!"}
+                        </div>
+                      )}
+
+                      {/* Animasi sederhana pakai Tailwind */}
+                      <style jsx>{`
+                        .animate-fade-in-up {
+                          animation: fadeInUp 0.4s ease-out, fadeOut 0.4s ease-in 1.6s forwards;
+                        }
+                        @keyframes fadeInUp {
+                          from {
+                            opacity: 0;
+                            transform: translateY(10px);
+                          }
+                          to {
+                            opacity: 1;
+                            transform: translateY(0);
+                          }
+                        }
+                        @keyframes fadeOut {
+                          to {
+                            opacity: 0;
+                            transform: translateY(10px);
+                          }
+                        }
+                      `}</style>
                 </div>
               </div>
             </div>
