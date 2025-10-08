@@ -185,7 +185,9 @@ const [copied, setCopied] = useState<string | null>(null);
       {/* === Kanan: konten scroll === */}
       <div className="relative h-screen overflow-y-auto shadow-[-8px_0_20px_rgba(0,0,0,0.5)] w-full">
           {/* Section 1: video intro */}
+          {/* === Section Intro === */}
           <section className="relative flex items-center justify-center h-screen bg-black overflow-hidden">
+            {/* Video Background */}
             <video
               className="absolute inset-0 w-full h-full object-cover"
               src="/Asset-Vintage-Architecture.mp4"
@@ -198,34 +200,39 @@ const [copied, setCopied] = useState<string | null>(null);
                 setShowText(true);
               }
             }}
-            ></video>
+            />
 
-            <div className="absolute inset-0"></div>
+            {/* Overlay lembut biar teks tetap jelas */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
 
+            {/* Konten teks di tengah tapi sedikit naik */}
             {showText && (
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative z-10 flex flex-col items-center text-center text-white px-6"
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center text-center text-white px-6"
               >
-                <p className="uppercase tracking-widest text-base md:text-lg mb-4">
+                <p className="uppercase tracking-widest text-sm sm:text-base md:text-lg mb-4 whitespace-nowrap font-light">
                   The Wedding of
                 </p>
 
-                <h1 className="text-5xl md:text-7xl font-serif italic">Asri</h1>
+                <h1 className="text-6xl md:text-7xl font-serif italic leading-none">Asri</h1>
 
-                <span className="text-xl md:text-2xl my-2">and</span>
+                <span className="text-2xl md:text-3xl my-1 font-light">and</span>
 
-                <h1 className="text-5xl md:text-7xl font-serif italic">Arief</h1>
+                <h1 className="text-6xl md:text-7xl font-serif italic leading-none">Arief</h1>
 
-                <p className="mt-6 text-xl md:text-2xl tracking-wide">07 · 12 · 25</p>
+                <p className="mt-5 text-xl md:text-2xl tracking-wide font-medium">
+                  07 · 12 · 25
+                </p>
 
+                {/* Panah Scroll */}
                 <motion.div
                   onClick={handleScrollDown}
                   animate={{ y: [0, 10, 0] }}
                   transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute -bottom-20 left-1/2 -translate-x-1/2 text-3xl text-white cursor-pointer border-2 rounded-full w-12 h-12 flex items-center justify-center"
+                  className="absolute -bottom-24 left-1/2 -translate-x-1/2 text-3xl text-white cursor-pointer border-2 border-white/70 rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-white/10 transition"
                   title="Scroll Down"
                 >
                   ⬇
@@ -233,6 +240,7 @@ const [copied, setCopied] = useState<string | null>(null);
               </motion.div>
             )}
           </section>
+
 
           {/* Section 2: quote dengan background */}
           <section
