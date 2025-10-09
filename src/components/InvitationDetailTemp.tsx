@@ -390,7 +390,8 @@ const [copied, setCopied] = useState<string | null>(null);
                     <p className="text-gray-700 text-lg">Putra dari</p>
                     <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos</p>
                     <p className="text-gray-600 text-sm font-semibold">&</p>
-                    <p className="text-gray-600 text-sm font-semibold">Suminar, S.Pd</p>
+                    <p className="text-gray-600 text-sm font-semibold">Sumin
+                      ar, S.Pd</p>
                   </div>
                 </div>
               </motion.div>
