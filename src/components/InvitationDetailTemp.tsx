@@ -212,16 +212,17 @@ const [copied, setCopied] = useState<string | null>(null);
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center text-center text-white px-6"
+                style={{ width: "100%", maxWidth: "480px" }} // ✅ kunci proporsionalitas
               >
                 <p className="uppercase tracking-widest text-sm sm:text-base md:text-lg mb-4 whitespace-nowrap font-light">
                   The Wedding of
                 </p>
 
-                <h1 className="text-6xl md:text-7xl font-serif italic leading-none">Asri</h1>
+                <h1 className="text-7xl md:text-8xl font-serif italic leading-none" style={{ fontFamily: "Bailenson, sans-serif" }}>Asri</h1>
 
-                <span className="text-2xl md:text-3xl my-1 font-light">and</span>
+                <span className="text-3xl md:text-4xl my-1 font-light" style={{ fontFamily: "Bailenson, sans-serif" }}>and</span>
 
-                <h1 className="text-6xl md:text-7xl font-serif italic leading-none">Arief</h1>
+                <h1 className="text-7xl md:text-8xl font-serif italic leading-none" style={{ fontFamily: "Bailenson, sans-serif" }}>Arief</h1>
 
                 <p className="mt-5 text-xl md:text-2xl tracking-wide font-medium">
                   07 · 12 · 25
@@ -276,48 +277,33 @@ const [copied, setCopied] = useState<string | null>(null);
                     {/* Frame + Initial */}
                     <div className="relative">
                    
-                      {/* Tulisan Vertikal */}
-                     <div className="relative flex items-center justify-center">
-                          {/* Frame */}
-                          <img
-                            src="/frame.png"
-                            alt="frame"
-                            className="mx-auto opacity-80 mix-blend-multiply 
-                                      w-56 sm:w-72 md:w-80 lg:w-[250px] 
-                                      transition-all duration-500 ease-in-out"
-                          />
-                        {/* Tulisan Vertikal */}
+                     {/* Tulisan Vertikal */}
+                      <div className="relative flex items-center justify-center">
+                        {/* Frame */}
+                        <img
+                          src="/frame.png"
+                          alt="frame"
+                          className="mx-auto opacity-80 mix-blend-multiply 
+                                    w-44 sm:w-56 md:w-64 xl:w-80 
+                                    transition-all duration-500 ease-in-out"
+                        />
+
+                        {/* Tulisan Vertikal Tengah */}
                         <div
-                          className="absolute inset-0 flex flex-col items-center justify-center leading-none"
-                          style={{
-                            transform: "rotate(-10deg)",
-                          }}
+                          className="absolute inset-0 flex flex-col items-center justify-center 
+                                    space-y-[0.5rem] sm:space-y-[0.6rem] md:space-y-[0.8rem] lg:space-y-[1rem]"
+                          style={{ transform: "translateY(-6%)" }} // 👈 naikin posisi tulisan
                         >
-                          <span
-                            className="text-5xl sm:text-6xl md:text-5xl font-serif italic text-gray-700 font-normal"
-                            style={{
-                              transform: "rotate(10deg)",
-                              lineHeight: "1",
-                            }}
-                          >
+                          <span className="text-[2rem] sm:text-[3.2rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[3rem] 
+                                          font-serif italic text-gray-700 font-normal drop-shadow-md leading-none">
                             A
                           </span>
-                          <span
-                            className="text-4xl sm:text-5xl md:text-3xl font-serif italic text-gray-700 font-normal"
-                            style={{
-                              transform: "rotate(10deg)",
-                              lineHeight: "1",
-                            }}
-                          >
+                          <span className="text-[2rem] sm:text-[2.6rem] md:text-[3rem] lg:text-[3.2rem] xl:text-[3rem] 
+                                          font-serif italic text-gray-700 font-normal drop-shadow-md leading-none">
                             &
                           </span>
-                          <span
-                            className="text-5xl sm:text-6xl md:text-5xl font-serif italic text-gray-700 font-normal"
-                            style={{
-                              transform: "rotate(10deg)",
-                              lineHeight: "1",
-                            }}
-                          >
+                          <span className="text-[2rem] sm:text-[3.2rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[3rem] 
+                                          font-serif italic text-gray-700 font-normal drop-shadow-md leading-none">
                             A
                           </span>
                         </div>
@@ -327,7 +313,7 @@ const [copied, setCopied] = useState<string | null>(null);
                     {/* Quote */}
                     <motion.p className="mt-6 italic text-gray-700 leading-relaxed text-center">
                       “And of His Signs is that He has created mates for you from your own kind that you may find peace in them and He has set between you love and mercy.”
-                      <span className="font-semibold">Ar-Rum: 21</span>
+                      <br></br><span className="font-semibold">Ar-Rum: 21</span>
                     </motion.p>
 
                     {/* Gambar bawah */}
@@ -383,24 +369,28 @@ const [copied, setCopied] = useState<string | null>(null);
                       The pleasure of your company is requested at the marriage of:
                     </p>
 
-                    {/* Groom */}
-                    <div className="relative w-64 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg">
-                      <img src="/asribridge.png" alt="Groom" className="w-full h-full object-cover" />
+                    {/* Groom */} 
+                    <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg">
+                      <img src="/asribridge.png" alt="Groom" className="w-full h-full object-contain object-center scale-115" />
                     </div>
                     <h3 className="mt-6 text-2xl font-serif italic text-gray-800 font-normal">Asri Cikita Putri, S.Ds.</h3>
                     <p className="text-gray-700 text-lg">Putri dari</p>
-                    <p className="text-gray-600 text-sm font-semibold">Drs. Agus Milad Jamal <br /> & Drg. Rita Febriyanti</p>
+                    <p className="text-gray-600 text-sm font-semibold">Drs. Agus Milad Jamal</p>
+                    <p className="text-gray-600 text-sm font-semibold">&</p>
+                    <p className="text-gray-600 text-sm font-semibold"> Drg. Rita Febriyanti</p>
 
                     {/* Simbol & */}
                     <h2 className="text-5xl font-serif italic text-gray-800 mt-10">&</h2>
 
                     {/* Bride */}
-                    <div className="relative w-64 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
-                      <img src="/ariefbridge.png" alt="Bride" className="w-full h-full object-cover" />
+                    <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
+                      <img src="/ariefbridge.png" alt="Bride" className="w-full h-full object-contain object-center scale-110" />
                     </div>
                     <h3 className="mt-6 text-2xl font-serif italic text-gray-800">Arief Rachman Nugraha, S.T.</h3>
                     <p className="text-gray-700 text-lg">Putra dari</p>
-                    <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos.<br /> & Suminar, S.Pd</p>
+                    <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos</p>
+                    <p className="text-gray-600 text-sm font-semibold">&</p>
+                    <p className="text-gray-600 text-sm font-semibold">Suminar, S.Pd</p>
                   </div>
                 </div>
               </motion.div>
