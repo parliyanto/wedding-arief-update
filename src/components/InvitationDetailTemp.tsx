@@ -437,7 +437,7 @@ const [copied, setCopied] = useState<string | null>(null);
             >
               {/* Card Event */}
               <div className="bg-white/90 rounded-2xl shadow-lg p-6 text-center">
-                <h2 className="text-2xl font-serif italic text-gray-800 mb-3 font-semibold">
+                <h2 className="text-4xl md:text-5xl font-serif italic text-gray-800 mb-3 font-semibold" style={{ fontFamily: "Bailenson, sans-serif" }}>
                   Wedding Ceremony
                 </h2>
                 <p className="text-gray-600 mb-1">Sunday, December 7<sup>th</sup> 2025</p>
@@ -722,7 +722,7 @@ const [copied, setCopied] = useState<string | null>(null);
 
             <div className="relative z-10 w-full max-w-md">
               <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 text-center">
-                <h2 className="text-2xl font-serif italic text-gray-800 mb-3">Wedding Gift</h2>
+                <h2 className="text-5xl md:text-5xl font-semibold font-serif italic text-gray-800 mb-3" style={{ fontFamily: "Bailenson, sans-serif" }}>Wedding Gift</h2>
                 <p className="text-gray-600 text-sm mb-6">
                   We are beyond grateful to have your resence, but if you would like to send us a gift, 
                   please transfer to one of these bank accounts:
