@@ -1,15 +1,27 @@
 "use client";
+
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 type CoverProps = {
   onOpen: () => void;
 };
 
+// ✅ Komponen utama
 export default function Cover({ onOpen }: CoverProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CoverInner onOpen={onOpen} />
+    </Suspense>
+  );
+}
+
+// ✅ Komponen dalam Suspense
+function CoverInner({ onOpen }: CoverProps) {
   const searchParams = useSearchParams();
   const namaTamu = searchParams.get("tamu") || "Guest Name"; // Ambil dari URL
 
-  // Optional: biar huruf pertama tiap kata otomatis kapital
+  // Optional: Kapitalisasi setiap kata
   const formatNama = namaTamu
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -40,18 +52,16 @@ export default function Cover({ onOpen }: CoverProps) {
       {/* Foto pasangan */}
       <div className="relative z-10 flex gap-6 sm:gap-8 mt-4">
         <div className="w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg">
-          <img src="/Asri.png" alt="Foto Pasangan" className="w-full h-full object-cover" />
+          <img src="/Asri.png" alt="Foto Asri" className="w-full h-full object-cover" />
         </div>
         <div className="w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-white shadow-lg">
-          <img src="/Arief.png" alt="Foto Arif" className="w-full h-full object-cover" />
+          <img src="/Arief.png" alt="Foto Arief" className="w-full h-full object-cover" />
         </div>
       </div>
 
       {/* Bagian bawah */}
       <div className="relative z-10 mb-5 sm:mb-8 mt-6">
-        <p className="text-base sm:text-lg md:text-lg drop-shadow-md mb-2">
-          Dear,
-        </p>
+        <p className="text-base sm:text-lg md:text-lg drop-shadow-md mb-2">Dear,</p>
         <p className="text-xl sm:text-2xl md:text-2xl font-semibold drop-shadow-md">
           {formatNama}
         </p>
