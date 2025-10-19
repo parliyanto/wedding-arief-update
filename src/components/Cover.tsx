@@ -1,4 +1,6 @@
 "use client";
+
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 type CoverProps = {
@@ -6,6 +8,14 @@ type CoverProps = {
 };
 
 export default function Cover({ onOpen }: CoverProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CoverContent onOpen={onOpen} />
+    </Suspense>
+  );
+}
+
+function CoverContent({ onOpen }: CoverProps) {
   const searchParams = useSearchParams();
   const namaTamu = searchParams.get("tamu") || "Guest Name";
   const adaPartner = searchParams.get("partner") === "true";
