@@ -34,3 +34,22 @@ body {
   /* font-style: normal; */
   line-height: 60px;
 }
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(10deg); }
+  50% { transform: translateY(-15px) rotate(8deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0) rotate(-15deg); }
+  50% { transform: translateY(15px) rotate(-12deg); }
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 10s ease-in-out infinite;
+}
+

@@ -1,10 +1,20 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 
 type CoverProps = {
   onOpen: () => void;
 };
 
 export default function Cover({ onOpen }: CoverProps) {
+  const searchParams = useSearchParams();
+  const namaTamu = searchParams.get("tamu") || "Guest Name"; // Ambil dari URL
+
+  // Optional: biar huruf pertama tiap kata otomatis kapital
+  const formatNama = namaTamu
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
   return (
     <section
       className="
@@ -39,15 +49,15 @@ export default function Cover({ onOpen }: CoverProps) {
 
       {/* Bagian bawah */}
       <div className="relative z-10 mb-5 sm:mb-8 mt-6">
-        <p className="text-base sm:text-lg md:text-lg drop-shadow-md mb-2 ">
+        <p className="text-base sm:text-lg md:text-lg drop-shadow-md mb-2">
           Dear,
         </p>
-        <p className="text-xl sm:text-2xl md:text-2xl font-semibold drop-shadow-md ">
-          Guest Name
+        <p className="text-xl sm:text-2xl md:text-2xl font-semibold drop-shadow-md">
+          {formatNama}
         </p>
         <button
           onClick={onOpen}
-          className="mt-6 px-5 py-3 sm:px-8 sm:py-4 bg-gradient-to-r bg[#ffb5b5] border-white border-2 
+          className="mt-6 px-5 py-3 sm:px-8 sm:py-4 bg-gradient-to-r border-white border-2 
                     rounded-full shadow-lg hover:scale-105 transition text-base sm:text-lg cursor-pointer"
         >
           Open Invitation

@@ -8,6 +8,7 @@ import "yet-another-react-lightbox/styles.css";
 import { Playfair_Display } from "next/font/google";
 
 
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -338,64 +339,115 @@ const [copied, setCopied] = useState<string | null>(null);
 
           {/* === Section 3: Bride & Groom === */}
           <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-              {/* BG Fixed Layer */}
-              <div
-                className="fixed top-0 left-0 w-full h-full bg-cover bg-center -z-10"
-                style={{ backgroundImage: "url('/ASSET-BG.png')" }}
-              ></div>
-              {/* Overlay tipis */}
-              <div className="absolute inset-0 bg-[#444952] -z-10"></div>
+            {/* 🦋 Animated Butterfly Layer */}
+            <div className="absolute inset-0 z-10">
+              {/* GIF background */}
+              <img
+                src="/Butterfly_fly.gif"
+                alt="Butterfly"
+                className="absolute w-[250px] md:w-[400px] opacity-40 animate-float-slow"
+                style={{
+                  top: "10%",
+                  left: "5%",
+                  transform: "rotate(10deg)",
+                }}
+              />
+              <img
+                src="/Butterfly.gif"
+                alt="Butterfly"
+                className="absolute w-[200px] md:w-[350px] opacity-40 animate-float-reverse"
+                style={{
+                  bottom: "10%",
+                  right: "5%",
+                  transform: "rotate(-15deg)",
+                }}
+              />
+            </div>
 
-              {/* Konten */}
-              <motion.div
-                className="relative z-10 w-full max-w-md"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut", delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative bg-transparent rounded-[100px] shadow-xl overflow-hidden mt-10 mx-auto w-[90%] max-w-sm">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center opacity-20"
-                    style={{ backgroundImage: "url('/ASSET-ARCHITECTURE-5.webp')" }}
-                  ></div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/70 to-white/90"></div>
+            {/* BG Fixed Layer */}
+            <div
+              className="absolute top-0 left-0 bg-center bg-no-repeat z-[1]"
+              style={{ backgroundImage: "url('/ASSET-BG.png')", 
+                       backgroundSize: 'contain',
+              }}
+            ></div>
 
-                  <div className="relative z-10 flex flex-col items-center text-center px-6 py-10">
-                    <h2 className="text-5xl md:text-5xl font-serif italic text-gray-800 mb-2" style={{ fontFamily: "Bailenson, sans-serif" }}>
-                      Bride & Groom
-                    </h2>
-                    <p className="text-gray-700 text-sm mb-6">
-                      The pleasure of your company is requested at the marriage of:
-                    </p>
+            {/* Overlay tipis */}
+            <div className="absolute inset-0 bg-[#444952]/90 -z-10"></div>
 
-                    {/* Groom */} 
-                    <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg">
-                      <img src="/asribridge.png" alt="Groom" className="w-full h-full object-contain object-center scale-115" />
-                    </div>
-                    <h3 className="mt-6 text-2xl font-serif italic text-gray-800 font-normal">Asri Cikita Putri, S.Ds.</h3>
-                    <p className="text-gray-700 text-lg">Putri dari</p>
-                    <p className="text-gray-600 text-sm font-semibold">Drs. Agus Milad Jamal</p>
-                    <p className="text-gray-600 text-sm font-semibold">&</p>
-                    <p className="text-gray-600 text-sm font-semibold"> Drg. Rita Febriyanti</p>
+            {/* Konten */}
+            <motion.div
+              className="relative z-10 w-full max-w-md"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, ease: 'easeOut', delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-transparent rounded-[100px] shadow-xl overflow-hidden mt-10 mx-auto w-[90%] max-w-sm">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-20"
+                  style={{ backgroundImage: "url('/ASSET-ARCHITECTURE-5.webp')" }}
+                ></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-white/70 to-white/90"></div>
 
-                    {/* Simbol & */}
-                    <h2 className="text-5xl font-serif italic text-gray-800 mt-10">&</h2>
+                <div className="relative z-10 flex flex-col items-center text-center px-6 py-10">
+                  <h2
+                    className="text-5xl md:text-5xl font-serif italic text-gray-800 mb-2"
+                    style={{ fontFamily: 'Bailenson, sans-serif' }}
+                  >
+                    Bride & Groom
+                  </h2>
+                  <p className="text-gray-700 text-sm mb-6">
+                    The pleasure of your company is requested at the marriage of:
+                  </p>
 
-                    {/* Bride */}
-                    <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
-                      <img src="/ariefbridge.png" alt="Bride" className="w-full h-full object-contain object-center scale-110" />
-                    </div>
-                    <h3 className="mt-6 text-2xl font-serif italic text-gray-800">Arief Rachman Nugraha, S.T.</h3>
-                    <p className="text-gray-700 text-lg">Putra dari</p>
-                    <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos</p>
-                    <p className="text-gray-600 text-sm font-semibold">&</p>
-                    <p className="text-gray-600 text-sm font-semibold">Sumin
-                      ar, S.Pd</p>
+                  {/* Groom */}
+                  <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg">
+                    <img
+                      src="/asribridge.png"
+                      alt="Groom"
+                      className="w-full h-full object-contain object-center scale-115"
+                    />
                   </div>
+                  <h3 className="mt-6 text-2xl font-serif italic text-gray-800 font-normal">
+                    Asri Cikita Putri, S.Ds.
+                  </h3>
+                  <p className="text-gray-700 text-lg">The Daughter of</p>
+                  <p className="text-gray-600 text-sm font-semibold">
+                    Drs. Agus Milad Jamal
+                  </p>
+                  <p className="text-gray-600 text-sm font-semibold">&</p>
+                  <p className="text-gray-600 text-sm font-semibold">
+                    Drg. Rita Febriyanti
+                  </p>
+
+                  {/* Simbol & */}
+                  <h2 className="text-5xl font-serif italic text-gray-800 mt-10"
+                      style={{ fontFamily: 'Bailenson, sans-serif' }}>
+                    &</h2>
+
+                  {/* Bride */}
+                  <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
+                    <img
+                      src="/ariefbridge.png"
+                      alt="Bride"
+                      className="w-full h-full object-contain object-center"
+                      style={{ transform: 'scale(1)' }}
+                    />
+
+                  </div>
+                  <h3 className="mt-6 text-2xl font-serif italic text-gray-800">
+                    Arief Rachman Nugraha, S.T.
+                  </h3>
+                  <p className="text-gray-700 text-lg">The Son of</p>
+                  <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos</p>
+                  <p className="text-gray-600 text-sm font-semibold">&</p>
+                  <p className="text-gray-600 text-sm font-semibold">Sumin ar, S.Pd</p>
                 </div>
-              </motion.div>
+              </div>
+            </motion.div>
           </section>
+
 
           {/* === Section 4: Foto Pasangan === */}
           <section className="relative flex items-center justify-center overflow-hidden min-h-screen">
@@ -724,7 +776,7 @@ const [copied, setCopied] = useState<string | null>(null);
               <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 text-center">
                 <h2 className="text-5xl md:text-5xl font-semibold font-serif italic text-gray-800 mb-3" style={{ fontFamily: "Bailenson, sans-serif" }}>Wedding Gift</h2>
                 <p className="text-gray-600 text-sm mb-6">
-                  We are beyond grateful to have your resence, but if you would like to send us a gift, 
+                  We are beyond grateful to have your presence, but if you would like to send us a gift, 
                   please transfer to one of these bank accounts:
                 </p>
 
