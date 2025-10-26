@@ -834,7 +834,7 @@ const [copied, setCopied] = useState<string | null>(null);
               {/* Foto */}
               <div className="relative rounded-2xl overflow-hidden p-[6px] bg-gray-400/30">
                 <img
-                  src="/ourlove.png"
+                  src="/loveStory.png"
                   alt="Our Story"
                   className="w-full h-64 object-cover rounded-2xl"
                 />
