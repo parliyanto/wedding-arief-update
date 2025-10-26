@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { motion } from "framer-motion";
 import Lightbox from "yet-another-react-lightbox";
@@ -17,6 +18,53 @@ const playfair = Playfair_Display({
 
 
 export default function InvitationDetail() {
+  // state from rsvp
+  const [guestName, setGuestName] = useState(""); // nama dari URL
+  const [address, setAddress] = useState("");
+  const [attend, setAttend] = useState("");
+  const [guestCount, setGuestCount] = useState("");
+
+  // 🧩 Tambahan untuk baca parameter dari URL
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const param = searchParams.get("tamu");
+    if (param) {
+      const formatted = param
+        .split(" ")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
+      setGuestName(formatted);
+      setName(formatted); // untuk wishes juga
+    }
+  }, [searchParams]);
+
+  // === SUBMIT RSVP ===
+  const handleRSVPSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!guestName || !attend) return alert("Please fill all required fields");
+
+    // contoh insert ke Supabase table `rsvp_guest`
+    const { error } = await supabase.from("rsvp_guest").insert([
+      {
+        name: guestName,
+        address,
+        status: attend,
+        guest_count: guestCount,
+      },
+    ]);
+
+    if (error) {
+      console.error(error);
+      alert("❌ Gagal menyimpan RSVP");
+    } else {
+      alert("✅ Terima kasih sudah mengisi RSVP!");
+      setAddress("");
+      setAttend("");
+      setGuestCount("");
+    }
+  };
+
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   interface Wish {
@@ -26,7 +74,12 @@ export default function InvitationDetail() {
   created_at: string;
 }
 
-const [wishes, setWishes] = useState<Wish[]>([]);
+  const [wishes, setWishes] = useState<Wish[]>([]);
+  // 🧡 Toast message khusus Best Wishes
+  const [wishToast, setWishToast] = useState<{ show: boolean; text: string }>({
+    show: false,
+    text: "",
+  });
 
   const [mounted, setMounted] = useState(false); // ✅ add
   const [showText, setShowText] = useState(false);
@@ -62,14 +115,25 @@ const [wishes, setWishes] = useState<Wish[]>([]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !message) return;
+  e.preventDefault();
 
-    await supabase.from("best_wishes").insert([{ name, message }]);
-    setName("");
+  if (!name || !message) {
+    setWishToast({ show: true, text: "❗Please write your message before sending!" });
+    return;
+  }
+
+  const { error } = await supabase.from("best_wishes").insert([{ name, message }]);
+
+  if (error) {
+    console.error(error);
+    setWishToast({ show: true, text: "❌ Failed to send your wishes." });
+  } else {
+    setWishToast({ show: true, text: "💖 Thank you for your beautiful wish!" });
     setMessage("");
     fetchWishes();
-  };
+  }
+};
+
 
 
     // ✅ Tambahkan ini dulu
@@ -165,6 +229,15 @@ const [copied, setCopied] = useState<string | null>(null);
       setCopied("Gagal copy");
     }
   };
+
+// 🧡 Auto hide toast message setelah 3 detik
+  useEffect(() => {
+  if (wishToast.show) {
+    const timer = setTimeout(() => setWishToast({ show: false, text: "" }), 3000);
+    return () => clearTimeout(timer);
+  }
+}, [wishToast]);
+
 
 
 
@@ -337,116 +410,122 @@ const [copied, setCopied] = useState<string | null>(null);
                   />
           </section>
 
-          {/* === Section 3: Bride & Groom === */}
-          <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-            {/* 🦋 Animated Butterfly Layer */}
-            <div className="absolute inset-0 z-10">
-              {/* GIF background */}
-              <img
-                src="/Butterfly_fly.gif"
-                alt="Butterfly"
-                className="absolute w-[250px] md:w-[400px] opacity-40 animate-float-slow"
-                style={{
-                  top: "10%",
-                  left: "5%",
-                  transform: "rotate(10deg)",
-                }}
-              />
-              <img
-                src="/Butterfly.gif"
-                alt="Butterfly"
-                className="absolute w-[200px] md:w-[350px] opacity-40 animate-float-reverse"
-                style={{
-                  bottom: "10%",
-                  right: "5%",
-                  transform: "rotate(-15deg)",
-                }}
-              />
-            </div>
+         {/* === Section 3: Bride & Groom === */}
+<section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+  {/* 🦋 Animated Butterfly Layer */}
+  <div className="absolute inset-0 z-10">
+    {/* GIF background */}
+    <img
+      src="/Butterfly_fly.gif"
+      alt="Butterfly"
+      className="absolute w-[250px] md:w-[400px] opacity-40 animate-float-slow"
+      style={{
+        top: "10%",
+        left: "5%",
+        transform: "rotate(10deg)",
+      }}
+    />
+    <img
+      src="/Butterfly.gif"
+      alt="Butterfly"
+      className="absolute w-[200px] md:w-[350px] opacity-40 animate-float-reverse"
+      style={{
+        bottom: "10%",
+        right: "5%",
+        transform: "rotate(-15deg)",
+      }}
+    />
+  </div>
 
-            {/* BG Fixed Layer */}
-            <div
-              className="absolute top-0 left-0 bg-center bg-no-repeat z-[1]"
-              style={{ backgroundImage: "url('/ASSET-BG.png')", 
-                       backgroundSize: 'contain',
-              }}
-            ></div>
+  {/* BG Fixed Layer */}
+  <div
+    className="absolute top-0 left-0 bg-center bg-no-repeat z-[1]"
+    style={{
+      backgroundImage: "url('/ASSET-BG.png')",
+      backgroundSize: "contain",
+    }}
+  ></div>
 
-            {/* Overlay tipis */}
-            <div className="absolute inset-0 bg-[#444952]/90 -z-10"></div>
+  {/* Overlay tipis */}
+  <div className="absolute inset-0 bg-[#444952]/90 -z-10"></div>
 
-            {/* Konten */}
-            <motion.div
-              className="relative z-10 w-full max-w-md"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, ease: 'easeOut', delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative bg-transparent rounded-[100px] shadow-xl overflow-hidden mt-10 mx-auto w-[90%] max-w-sm">
-                <div
-                  className="absolute inset-0 bg-cover bg-center opacity-20"
-                  style={{ backgroundImage: "url('/ASSET-ARCHITECTURE-5.webp')" }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-white/70 to-white/90"></div>
+  {/* Konten */}
+  <motion.div
+    className="relative z-10 w-full max-w-md"
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.3, ease: "easeOut", delay: 0.3 }}
+    viewport={{ once: true }}
+  >
+    <div className="relative bg-transparent rounded-[100px] shadow-xl overflow-hidden mt-10 mx-auto w-[90%] max-w-sm">
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{ backgroundImage: "url('/ASSET-ARCHITECTURE-5.webp')" }}
+      ></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white/70 to-white/90"></div>
 
-                <div className="relative z-10 flex flex-col items-center text-center px-6 py-10">
-                  <h2
-                    className="text-5xl md:text-5xl font-serif italic text-gray-800 mb-2"
-                    style={{ fontFamily: 'Bailenson, sans-serif' }}
-                  >
-                    Bride & Groom
-                  </h2>
-                  <p className="text-gray-700 text-sm mb-6">
-                    The pleasure of your company is requested at the marriage of:
-                  </p>
+      <div className="relative z-10 flex flex-col items-center text-center px-6 py-10">
+        <h2
+          className="text-5xl md:text-5xl font-serif italic text-gray-800 mb-2"
+          style={{ fontFamily: "Bailenson, sans-serif" }}
+        >
+          Bride & Groom
+        </h2>
+        <p className="text-gray-700 text-sm mb-6">
+          The pleasure of your company is requested at the marriage of:
+        </p>
 
-                  {/* Groom */}
-                  <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg">
-                    <img
-                      src="/asribridge.png"
-                      alt="Groom"
-                      className="w-full h-full object-contain object-center scale-115"
-                    />
-                  </div>
-                  <h3 className="mt-6 text-2xl font-serif italic text-gray-800 font-normal">
-                    Asri Cikita Putri, S.Ds.
-                  </h3>
-                  <p className="text-gray-700 text-lg">The Daughter of</p>
-                  <p className="text-gray-600 text-sm font-semibold">
-                    Drs. Agus Milad Jamal
-                  </p>
-                  <p className="text-gray-600 text-sm font-semibold">&</p>
-                  <p className="text-gray-600 text-sm font-semibold">
-                    Drg. Rita Febriyanti
-                  </p>
+        {/* Bride */}
+        <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg">
+          <img
+            src="/asribridge.png"
+            alt="Bride"
+            className="w-full h-full object-contain object-center scale-115"
+            style={{
+              transform: 'translateY(20px)', // 🔥 geser 25px ke bawah
+            }}
+          />
+        </div>
+        <h3 className="mt-6 text-2xl font-serif italic text-gray-800 font-normal">
+          Asri Cikita Putri, S.Ds.
+        </h3>
+        <p className="text-gray-700 text-lg">The Daughter of</p>
+        <p className="text-gray-600 text-sm font-semibold">
+          Drs. Agus Milad Jamal
+        </p>
+        <p className="text-gray-600 text-sm font-semibold">&</p>
+        <p className="text-gray-600 text-sm font-semibold">
+          Drg. Rita Febriyanti
+        </p>
 
-                  {/* Simbol & */}
-                  <h2 className="text-5xl font-serif italic text-gray-800 mt-10"
-                      style={{ fontFamily: 'Bailenson, sans-serif' }}>
-                    &</h2>
+        {/* Simbol & */}
+        <h2
+          className="text-5xl font-serif italic text-gray-800 mt-10"
+          style={{ fontFamily: "Bailenson, sans-serif" }}
+        >
+          &
+        </h2>
 
-                  {/* Bride */}
-                  <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
-                    <img
-                      src="/ariefbridge.png"
-                      alt="Bride"
-                      className="w-full h-full object-contain object-center"
-                      style={{ transform: 'scale(1)' }}
-                    />
+        {/* Groom */}
+        <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
+          <img
+            src="/ariefbridge.png"
+            alt="Groom"
+            className="w-full h-full object-contain object-center"
+          />
+        </div>
+        <h3 className="mt-6 text-2xl font-serif italic text-gray-800">
+          Arief Rachman Nugraha, S.T.
+        </h3>
+        <p className="text-gray-700 text-lg">The Son of</p>
+        <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos</p>
+        <p className="text-gray-600 text-sm font-semibold">&</p>
+        <p className="text-gray-600 text-sm font-semibold">Suminar, S.Pd</p>
+      </div>
+    </div>
+  </motion.div>
+</section>
 
-                  </div>
-                  <h3 className="mt-6 text-2xl font-serif italic text-gray-800">
-                    Arief Rachman Nugraha, S.T.
-                  </h3>
-                  <p className="text-gray-700 text-lg">The Son of</p>
-                  <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos</p>
-                  <p className="text-gray-600 text-sm font-semibold">&</p>
-                  <p className="text-gray-600 text-sm font-semibold">Sumin ar, S.Pd</p>
-                </div>
-              </div>
-            </motion.div>
-          </section>
 
 
           {/* === Section 4: Foto Pasangan === */}
@@ -557,7 +636,7 @@ const [copied, setCopied] = useState<string | null>(null);
             >
                <div className="w-full pb-[56.25%] h-0 overflow-hidden rounded-2xl shadow-lg mt-5 mb-10 relative">
                 <video
-                  className="absolute top-0 left-0 w-full h-full rounded-2xl"
+                  className="absolute top-0 left-0 w-full h-full rounded-2xl border-2 border-white"
                   src="/weddingvideo3.mp4"
                   controls
                   playsInline
@@ -633,7 +712,7 @@ const [copied, setCopied] = useState<string | null>(null);
           />
           </section>
 
-          {/* === Section 8: Countdown + RSVP === */}F
+          {/* === Section 8: Countdown + RSVP === */}
           <section className="relative flex flex-col items-center justify-center overflow-hidden min-h-screen px-4 py-12">
             {/* BG Fixed */}
             <div
@@ -679,27 +758,59 @@ const [copied, setCopied] = useState<string | null>(null);
                 </div>
               </div>
 
-              {/* RSVP Form */}
-              <div className="bg-white shadow-lg p-6 text-center rounded-b-2xl">
-                <h2 className="text-2xl font-serif italic text-gray-800 mb-3">RSVP FORM</h2>
-                <form className="space-y-4">
-                  <input type="text" placeholder="Name" className="w-full border rounded-lg p-2 text-black" />
-                  <input type="text" placeholder="Address" className="w-full border rounded-lg p-2 text-black" />
-                  <select className="w-full border rounded-lg p-2 text-black">
-                    <option>Will you attend?</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                  </select>
-                  <input type="number" placeholder="Amount of Guest" className="w-full border rounded-lg p-2 text-black" />
-                  <button type="submit" className="bg-gray-600 text-white px-6 py-2 hover:bg-gray-700 transition w-full">
-                    Submit
-                  </button>
-                </form>
-              </div>
+              {/* 🧩 RSVP Form */}
+          <div className="bg-white shadow-lg p-6 text-center rounded-b-2xl">
+            <h2 className="text-2xl font-serif italic text-gray-800 mb-3">
+              RSVP FORM
+            </h2>
+
+            <form onSubmit={handleRSVPSubmit} className="space-y-4">
+              {/* === Name otomatis dari URL === */}
+              <input
+                type="text"
+                value={guestName}
+                readOnly
+                className="w-full border rounded-lg p-2 text-black bg-gray-100 cursor-not-allowed"
+              />
+
+              <input
+                type="text"
+                placeholder="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className="w-full border rounded-lg p-2 text-black"
+              />
+
+              <select
+                value={attend}
+                onChange={(e) => setAttend(e.target.value)}
+                className="w-full border rounded-lg p-2 text-black"
+              >
+                <option value="">Will you attend?</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+
+              <input
+                type="number"
+                placeholder="Amount of Guest"
+                value={guestCount}
+                onChange={(e) => setGuestCount(e.target.value)}
+                className="w-full border rounded-lg p-2 text-black"
+              />
+
+              <button
+                type="submit"
+                className="bg-gray-600 text-white px-6 py-2 hover:bg-gray-700 transition w-full"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
             </div>
           </section>
 
-          {/* === Section 9: `Our Love` Story === */}
+          {/* === Section 9: Our Love Story === */}
           <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-[#7b8994] bg-cover bg-center">
             {/* Overlay pattern tipis */}
             <div
@@ -734,25 +845,19 @@ const [copied, setCopied] = useState<string | null>(null);
                 <div>
                   <h3 className="text-3xl font-serif italic mb-2 mt-5">First Meeting</h3>
                   <p className="text-sm leading-relaxed">
-                    At the beginning of our accquaintance, we were in the same class when
-                    we were in college. He sent a private chat because he knew that we
-                    were from the same city. From there we got to know each other.
+                    Our first hello was through a dating app. What started as a simple chat slowly grew into something comforting. Guided by prayers and a little courage we decided to put this relationship into something real.
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-serif italic mb-2">Two Become One</h3>
+                  <h3 className="text-3xl font-serif italic mb-2">Together as One</h3>
                   <p className="text-sm leading-relaxed">
-                    After getting closer when we met at the chancellors cup we started
-                    communicating and meeting up frequently. Then he expressed his
-                    feelings and said he wanted to commit.
+                    As our hearts grew closer, we introduced each other to our families. It was our way of showing that this love was meant to be taken seriously.
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-serif italic mb-2">New Journey</h3>
+                  <h3 className="text-3xl font-serif italic mb-2">Our Promise</h3>
                   <p className="text-sm leading-relaxed mb-10">
-                    Year after year passed and brought us closer. we became convinced that
-                    we were meant to be together. It wasnt easy for us to get to this
-                    point. but it was all worth it
+                    Despite our differences and challenges, we still choose nurture this love together. Now we begin a new chapter filled with love, faith, purpose, and a life-long promise.
                   </p>
                 </div>
               </div>
@@ -865,69 +970,106 @@ const [copied, setCopied] = useState<string | null>(null);
 
           {/* === Section 12: Best Wishes === */}
           <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-[#7b8994] bg-cover bg-center">
-        {/* Overlay abu + pattern */}
-        <div
-          className="absolute inset-0 opacity-5 bg-contain"
-          style={{ backgroundImage: "url('/ASSET-BG.png')" }}
-        ></div>
-        <div className="absolute inset-0 bg-black/50 -z-10"></div>
-
-        <motion.div
-          className="relative z-10 w-full max-w-lg text-center bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, ease: "easeOut", delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-5xl md:text-5xl mb-4 text-black" style={{ fontFamily: "Bailenson, sans-serif" }}>Best Wishes</h2>
-          <p className="text-gray-700 mb-8">Leave us your beautiful wishes here:</p>
-
-          {/* Form input */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-md border border-black px-4 py-2 text-black"
-            />
-            <textarea
-              rows={4}
-              maxLength={500}
-              placeholder="Your Best Wishes"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full rounded-md border border-black px-4 py-2 text-black"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-gray-800 text-white px-6 py-2 rounded-md hover:bg-gray-900 transition"
-            >
-              Send Wishes
-            </button>
-          </form>
-        </motion.div>
-
-      
-      {/* Daftar Wishes */}
-        <div className="relative z-10 w-full max-w-lg mt-8 space-y-4">
-          {wishes.map((wish) => (
+            {/* Overlay abu + pattern */}
             <div
-              key={wish.id}
-              className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow"
+              className="absolute inset-0 opacity-5 bg-contain"
+              style={{ backgroundImage: "url('/ASSET-BG.png')" }}
+            ></div>
+            <div className="absolute inset-0 bg-black/50 -z-10"></div>
+
+            <motion.div
+              className="relative z-10 w-full max-w-lg text-center bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut", delay: 0.3 }}
+              viewport={{ once: true }}
             >
-              <p className="font-semibold text-gray-900">{wish.name}</p>
-              <p className="text-gray-700">{wish.message}</p>
-              <p className="text-xs text-gray-500">
-                {new Date(wish.created_at).toLocaleString("id-ID", {
-                  dateStyle: "short",
-                  timeStyle: "short",
-                })}
+              <h2
+                className="text-5xl md:text-5xl mb-4 text-black"
+                style={{ fontFamily: "Bailenson, sans-serif" }}
+              >
+                Best Wishes
+              </h2>
+              <p className="text-gray-700 mb-8">
+                Leave us your beautiful wishes here:
               </p>
+
+              {/* 🧩 Form input */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  readOnly
+                  className="w-full rounded-md border border-black px-4 py-2 text-black bg-gray-100 cursor-not-allowed"
+                />
+                <textarea
+                  rows={4}
+                  maxLength={500}
+                  placeholder="Your Best Wishes"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="w-full rounded-md border border-black px-4 py-2 text-black"
+                ></textarea>
+                <button
+                  type="submit"
+                  className="bg-gray-800 text-white px-6 py-2 rounded-md hover:bg-gray-900 transition"
+                >
+                  Send Wishes
+                </button>
+              </form>
+              {wishToast.show && (
+                <div
+                  className={`fixed bottom-6 right-6 bg-white/80 backdrop-blur-md border border-gray-300 text-gray-800 px-4 py-2 rounded-xl shadow-lg animate-fade-in-up z-[9999]`}
+                >
+                  {wishToast.text}
+                </div>
+              )}
+
+
+              <style jsx>{`
+                @keyframes fadeInUp {
+                  0% {
+                    opacity: 0;
+                    transform: translateY(10px);
+                  }
+                  100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+                .animate-fade-in-up {
+                  animation: fadeInUp 0.4s ease-out;
+                }
+              `}</style>
+            </motion.div>
+
+            {/* Daftar Wishes */}
+            <div
+              className="relative z-10 w-full max-w-lg mt-8 space-y-4 overflow-y-auto scroll-smooth"
+              style={{
+                maxHeight: "300px", // 🔥 batas tinggi scroll area
+                scrollbarWidth: "thin", // Firefox
+              }}
+            >
+              {wishes.map((wish) => (
+                <div
+                  key={wish.id}
+                  className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow"
+                >
+                  <p className="font-semibold text-gray-900">{wish.name}</p>
+                  <p className="text-gray-700">{wish.message}</p>
+                  <p className="text-xs text-gray-500">
+                    {new Date(wish.created_at).toLocaleString("id-ID", {
+                      dateStyle: "short",
+                      timeStyle: "short",
+                    })}
+                  </p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
           </section>
+
 
           {/* === Section 13: Closing === */}
           <section className="relative w-full"> 
@@ -963,7 +1105,7 @@ const [copied, setCopied] = useState<string | null>(null);
             </div>
           </section>
     
-                {/* Tombol Kontrol Musik */}
+          {/* Tombol Kontrol Musik */}
           <motion.button
             onClick={togglePlay}
             initial={{ opacity: 0, y: 20 }}

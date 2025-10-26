@@ -53,3 +53,18 @@ body {
   animation: float-reverse 10s ease-in-out infinite;
 }
 
+/* Scrollbar styling khusus untuk Best Wishes */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
