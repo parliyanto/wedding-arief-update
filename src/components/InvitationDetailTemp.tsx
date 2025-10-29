@@ -857,7 +857,7 @@ const [copied, setCopied] = useState<string | null>(null);
                 <div>
                   <h3 className="text-3xl font-serif italic mb-2">Our Promise</h3>
                   <p className="text-sm leading-relaxed mb-10">
-                    Despite our differences and challenges, we still choose nurture this love together. Now we begin a new chapter filled with love, faith, purpose, and a life-long promise.
+                    Despite our differences and challenges, we still choose to nurture this love together. Now we begin a new chapter filled with love, faith, purpose, and a life-long promise.
                   </p>
                 </div>
               </div>
