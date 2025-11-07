@@ -27,7 +27,7 @@ export default function InvitationDetail() {
   // 🧩 Tambahan untuk baca parameter dari URL
   const searchParams = useSearchParams();
   useEffect(() => {
-    const param = searchParams.get("tamu");
+    const param = searchParams.get("guest_name");
     if (param) {
       const formatted = param
         .split(" ")
@@ -249,7 +249,7 @@ const [copied, setCopied] = useState<string | null>(null);
       <div className="h-screen sticky top-0 hidden md:block">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/sidebar.png')" }}
+          style={{ backgroundImage: "url('/sidebar.webp')" }}
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
       </div>
@@ -321,7 +321,7 @@ const [copied, setCopied] = useState<string | null>(null);
           <section
               ref={nextSectionRef}
               className="relative min-h-screen flex items-center justify-center bg-contain bg-center px-4 bg-[#7b8994] "
-              style={{ backgroundImage: "url('/ASSET-BG.png')" }}
+              style={{ backgroundImage: "url('/ASSET-BG.webp')" }}
             >
               {/* 🔥 Overlay warna tambahan */}
               <div
@@ -355,7 +355,7 @@ const [copied, setCopied] = useState<string | null>(null);
                       <div className="relative flex items-center justify-center">
                         {/* Frame */}
                         <img
-                          src="/frame.png"
+                          src="/frame.webp"
                           alt="frame"
                           className="mx-auto opacity-80 mix-blend-multiply 
                                     w-44 sm:w-56 md:w-64 xl:w-80 
@@ -394,7 +394,7 @@ const [copied, setCopied] = useState<string | null>(null);
                     <div className="relative mt-6">
                       {/* Foto pasangan */}
                       <img
-                        src="/section2.png"
+                        src="/section2.webp"
                         alt="photo"
                         className="w-full object-cover rounded-2xl"
                       />
@@ -441,7 +441,7 @@ const [copied, setCopied] = useState<string | null>(null);
   <div
     className="absolute top-0 left-0 bg-center bg-no-repeat z-[1]"
     style={{
-      backgroundImage: "url('/ASSET-BG.png')",
+      backgroundImage: "url('/ASSET-BG.webp')",
       backgroundSize: "contain",
     }}
   ></div>
@@ -478,7 +478,7 @@ const [copied, setCopied] = useState<string | null>(null);
         {/* Bride */}
         <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg">
           <img
-            src="/asribridge.png"
+            src="/asribridge.webp"
             alt="Bride"
             className="w-full h-full object-contain object-center scale-115"
             style={{
@@ -509,7 +509,7 @@ const [copied, setCopied] = useState<string | null>(null);
         {/* Groom */}
         <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
           <img
-            src="/ariefbridge.png"
+            src="/ariefbridge.webp"
             alt="Groom"
             className="w-full h-full object-contain object-center"
           />
