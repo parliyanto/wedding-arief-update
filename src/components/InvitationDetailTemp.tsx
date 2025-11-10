@@ -509,9 +509,9 @@ const [copied, setCopied] = useState<string | null>(null);
         {/* Groom */}
         <div className="relative w-60 h-80 mx-auto overflow-hidden rounded-[50%] border border-gray-400 shadow-lg mt-10">
           <img
-            src="/ariefbridge.webp"
+            src="/ariefbridge.png"
             alt="Groom"
-            className="w-full h-full object-contain object-center"
+            className="w-full h-full object-cover object-center scale-105 transition-transform duration-700"
           />
         </div>
         <h3 className="mt-6 text-2xl font-serif italic text-gray-800">
