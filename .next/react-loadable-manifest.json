@@ -24,8 +24,73 @@
   "components\\Invitation.tsx -> ./InvitationDetailTemp": {
     "id": "components\\Invitation.tsx -> ./InvitationDetailTemp",
     "files": [
-      "static/css/_app-pages-browser_src_components_InvitationDetailTemp_tsx.css",
       "static/chunks/_app-pages-browser_src_components_InvitationDetailTemp_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/BrideGroom": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/BrideGroom",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_BrideGroom_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/Ceremony": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/Ceremony",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_Ceremony_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/Closing": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/Closing",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_Closing_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/CountdownRsvp": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/CountdownRsvp",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_CountdownRsvp_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/Gallery": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/Gallery",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_Gallery_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/Gift": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/Gift",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_Gift_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/Intro": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/Intro",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_Intro_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/LoveStory": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/LoveStory",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_LoveStory_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/PhotoSection": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/PhotoSection",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_PhotoSection_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/Quote": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/Quote",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_Quote_tsx.js"
+    ]
+  },
+  "components\\InvitationDetailTemp.tsx -> @/components/sections/Wishes": {
+    "id": "components\\InvitationDetailTemp.tsx -> @/components/sections/Wishes",
+    "files": [
+      "static/chunks/_app-pages-browser_src_components_sections_Wishes_tsx.js"
     ]
   }
 }
