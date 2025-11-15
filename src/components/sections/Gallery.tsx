@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Lightbox from "yet-another-react-lightbox";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+// WAJIB: import CSS agar tidak freeze
+import "yet-another-react-lightbox/styles.css";
+
+// FIX 1: dynamic import Lightbox
+const Lightbox = dynamic(() => import("yet-another-react-lightbox"), {
+  ssr: false,
+});
 
 const images = [
   "/gallery1.png",
@@ -16,15 +24,17 @@ export default function Gallery() {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-[#7b8994] overflow-hidden">
+  // FIX 2: DOM portal target (mencegah freeze)
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-      {/* === BACKGROUND PATTERN (Optimized) === */}
+  return (
+    <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12 bg-[#7b8994]">
+
+      {/* === BACKGROUND PATTERN === */}
       <div
-        className="absolute inset-0 opacity-20 bg-[length:300px] bg-repeat -z-20"
-        style={{
-          backgroundImage: "url('/ASSET-BG.png')",
-        }}
+        className="absolute inset-0 opacity-20 bg-[length:300px] bg-repeat z-0"
+        style={{ backgroundImage: "url('/ASSET-BG.png')" }}
       />
 
       <div className="relative z-10 w-full max-w-4xl text-center">
@@ -35,7 +45,7 @@ export default function Gallery() {
           Our Gallery
         </h2>
 
-        {/* === VIDEO (Optimized) === */}
+        {/* === VIDEO === */}
         <motion.div
           className="relative w-full max-w-2xl text-center mt-10"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -48,12 +58,12 @@ export default function Gallery() {
               src="/weddingvideo3.mp4"
               controls
               playsInline
-              preload="none"       // agar tidak memberatkan halaman
+              preload="none"
             />
           </div>
         </motion.div>
 
-        {/* === GALLERY GRID (Optimized) === */}
+        {/* === GALLERY GRID === */}
         <div className="grid grid-cols-2 gap-4 relative z-20">
           {images.map((src, idx) => {
             const isBig = idx % 3 === 0;
@@ -77,8 +87,6 @@ export default function Gallery() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     loading="lazy"
                     quality={65}
-                    placeholder="blur"
-                    blurDataURL="/blur-placeholder.png"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -87,14 +95,20 @@ export default function Gallery() {
           })}
         </div>
 
-        {/* === LIGHTBOX (Optimized) === */}
-        <Lightbox
-          open={open}
-          index={index}
-          close={() => setOpen(false)}
-          slides={images.map((src) => ({ src }))}
-          carousel={{ preload: 1 }}       // dikurangi, lebih ringan
-        />
+        {/* === LIGHTBOX === */}
+        {mounted && (
+          <Lightbox
+            open={open}
+            index={index}
+            close={() => setOpen(false)}
+            slides={images.map((src) => ({
+              src,
+              width: 1600, // ukuran GA BISA HILANG
+              height: 2400,
+            }))}
+            carousel={{ preload: 1 }}
+          />
+        )}
       </div>
     </section>
   );

@@ -9,6 +9,8 @@ export default function Wishes() {
   const [message, setMessage] = useState("");
   const [wishes, setWishes] = useState<any[]>([]);
   const [toast, setToast] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   // === Ambil nama dari URL ===
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function Wishes() {
     }
   }, []);
 
-  // === Ambil Wishes ===
+  // === Ambil semua wishes ===
   const fetchWishes = async () => {
     const { data } = await supabase
       .from("best_wishes")
@@ -34,18 +36,36 @@ export default function Wishes() {
     if (data) setWishes(data);
   };
 
+  // === Cek apakah user ini sudah pernah submit ===
+  const checkIfSubmitted = async () => {
+    if (!name) return;
+
+    const { data } = await supabase
+      .from("best_wishes")
+      .select("id")
+      .eq("name", name)
+      .maybeSingle();
+
+    if (data) setHasSubmitted(true);
+    setChecking(false);
+  };
+
   useEffect(() => {
     fetchWishes();
   }, []);
 
-  // === Auto Hide Toast ===
+  useEffect(() => {
+    if (name) checkIfSubmitted();
+  }, [name]);
+
+  // === Auto hide toast ===
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(""), 2000);
     return () => clearTimeout(t);
   }, [toast]);
 
-  // === Submit Wishes ===
+  // === Submit ===
   const submitWish = async (e: any) => {
     e.preventDefault();
     if (!name || !message) return setToast("Please fill all fields");
@@ -57,24 +77,22 @@ export default function Wishes() {
     if (!error) {
       setMessage("");
       setToast("Thank you for your beautiful wish!");
+      setHasSubmitted(true);
       fetchWishes();
     }
   };
 
   const hasUrlName =
-  typeof window !== "undefined" &&
-  !!new URL(window.location.href).searchParams.get("guest_name");
-
+    typeof window !== "undefined" &&
+    !!new URL(window.location.href).searchParams.get("guest_name");
 
   return (
     <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12 overflow-hidden">
 
-      {/* === BACKGROUND OPTIMAL === */}
+      {/* === BACKGROUND === */}
       <div className="absolute inset-0 -z-20">
-        {/* Base color */}
         <div className="absolute inset-0 bg-[#7b8994]" />
 
-        {/* Pattern contain (tidak nge-zoom) */}
         <Image
           src="/ASSET-BG.png"
           alt="pattern"
@@ -85,7 +103,6 @@ export default function Wishes() {
           className="object-contain opacity-20"
         />
 
-        {/* Blur overlay cover (isi area kosong) */}
         <Image
           src="/ASSET-BG.png"
           alt="pattern blur"
@@ -97,11 +114,11 @@ export default function Wishes() {
         />
       </div>
 
-      {/* Overlay hitam elegan */}
       <div className="absolute inset-0 bg-black/40 -z-10"></div>
 
-      {/* === CARD FORM === */}
+      {/* === CARD WISH FORM === */}
       <div className="relative z-10 w-full max-w-lg text-center bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg">
+
         <h2
           className="text-5xl md:text-5xl mb-4 text-black"
           style={{ fontFamily: "Bailenson, sans-serif" }}
@@ -109,33 +126,46 @@ export default function Wishes() {
           Best Wishes
         </h2>
 
-        <p className="text-gray-700 mb-8">Leave your beautiful message 💖</p>
+        {checking && (
+          <p className="text-gray-700">Checking your invitation...</p>
+        )}
 
-        <form onSubmit={submitWish} className="space-y-4">
-          <input
-            value={name}
-            onChange={(e) => {
-              if (!hasUrlName) setName(e.target.value);
-            }}
-            readOnly={hasUrlName}
-            placeholder="Masukkan Nama Anda"
-            className="w-full border border-black bg-gray-100 rounded-md px-4 py-2 text-black"
-          />
-          <textarea
-            rows={4}
-            maxLength={500}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Your best wishes"
-            className="w-full border border-black rounded-md px-4 py-2 text-black"
-          ></textarea>
+        {!checking && hasSubmitted && (
+          <p className="text-xl font-semibold text-gray-900 py-10">
+            Thank you for confirming your presence 💖
+          </p>
+        )}
 
-          <button className="bg-gray-800 text-white px-6 py-2 rounded-md w-full hover:bg-gray-900 cursor-pointer">
-            Send Wish
-          </button>
-        </form>
+        {!checking && !hasSubmitted && (
+          <>
+            <p className="text-gray-700 mb-8">Leave your beautiful message 💖</p>
 
-        {/* === TOAST === */}
+            <form onSubmit={submitWish} className="space-y-4">
+              <input
+                value={name}
+                onChange={(e) => {
+                  if (!hasUrlName) setName(e.target.value);
+                }}
+                readOnly={hasUrlName}
+                placeholder="Masukkan Nama Anda"
+                className="w-full border border-black bg-gray-100 rounded-md px-4 py-2 text-black"
+              />
+              <textarea
+                rows={4}
+                maxLength={500}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Your best wishes"
+                className="w-full border border-black rounded-md px-4 py-2 text-black"
+              ></textarea>
+
+              <button className="bg-gray-800 text-white px-6 py-2 rounded-md w-full hover:bg-gray-900 cursor-pointer">
+                Send Wish
+              </button>
+            </form>
+          </>
+        )}
+
         {toast && (
           <div className="fixed top-6 right-6 bg-white/80 backdrop-blur-md border border-gray-300 text-gray-800 px-4 py-2 rounded-xl shadow-lg animate-fade-in-up z-[9999]">
             {toast}
@@ -153,27 +183,54 @@ export default function Wishes() {
         `}</style>
       </div>
 
-      {/* === LIST WISHES (LIGHT & SMOOTH) === */}
+      {/* === LIST WISHES WRAPPER === */}
+<div
+  className="relative z-10 w-full max-w-lg mt-4 bg-white/20 backdrop-blur-md rounded-xl p-4 shadow-xl border border-white/30"
+>
+  {/* === HEADER (TIDAK IKUT SCROLL) === */}
+  <div className="flex items-center justify-between mb-3 px-1">
+    <h3
+      className="text-xl font-semibold text-white"
+      style={{ fontFamily: "Bailenson, sans-serif" }}
+    >
+      Ucapan & Doa Para Tamu
+    </h3>
+
+    <span
+      className="
+        text-sm font-semibold text-white 
+        border border-white/50 
+        px-3 py-1 rounded-full 
+        bg-white/10 backdrop-blur-md 
+        shadow-sm
+      "
+    >
+      ({wishes.length}) Ucapan
+    </span>
+  </div>
+
+  {/* === LIST BODY (HANYA INI YANG SCROLL) === */}
+  <div
+    className="space-y-4 overflow-y-auto scroll-smooth pr-1"
+    style={{
+      maxHeight: "260px",
+      scrollbarWidth: "thin"
+    }}
+  >
+    {wishes.map((w) => (
       <div
-        className="relative z-10 w-full max-w-lg mt-8 space-y-4 overflow-y-auto scroll-smooth"
-        style={{
-          maxHeight: "300px",
-          scrollbarWidth: "thin"
-        }}
+        key={w.id}
+        className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow"
       >
-        {wishes.map((w) => (
-          <div
-            key={w.id}
-            className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow"
-          >
-            <p className="font-semibold text-gray-900">{w.name}</p>
-            <p className="text-gray-800">{w.message}</p>
-            <p className="text-xs text-gray-600">
-              {new Date(w.created_at).toLocaleString("id-ID")}
-            </p>
-          </div>
-        ))}
+        <p className="font-semibold text-gray-900">{w.name}</p>
+        <p className="text-gray-800">{w.message}</p>
+        <p className="text-xs text-gray-600">
+          {new Date(w.created_at).toLocaleString("id-ID")}
+        </p>
       </div>
+    ))}
+  </div>
+</div>
     </section>
   );
 }

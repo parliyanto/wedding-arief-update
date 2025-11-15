@@ -34,7 +34,7 @@ export default function Ceremony() {
         <div className="bg-white/90 rounded-2xl shadow-lg p-6 text-center backdrop-blur-sm">
 
           <h2
-            className="text-4xl md:text-5xl font-serif italic text-gray-800 mb-3 font-semibold"
+            className="text-4xl md:text-5xl italic text-gray-800 mb-3"
             style={{ fontFamily: "Bailenson, sans-serif" }}
           >
             Wedding Ceremony

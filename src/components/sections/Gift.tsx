@@ -37,22 +37,26 @@ export default function Gift() {
             If you would like to send us a gift:
           </p>
 
-          {[
+          {[ 
             { name: "Asri Cikita Putri", bank: "5771426574" },
             { name: "Arief Rachman Nugraha", bank: "4670089164" },
           ].map((x, idx) => (
             <div
               key={idx}
-              className="flex justify-between items-center bg-gray-100 rounded-lg px-4 py-2 mb-3"
+              className="flex justify-between items-center bg-gray-100 rounded-lg px-4 py-2 mb-3 gap-3"
             >
-              <div>
+              <div className="text-left">
                 <p className="font-medium text-gray-800">{x.name}</p>
-                <p className="text-sm text-gray-600">BCA {x.bank}</p>
+
+                {/* FIX: Bank selalu kiri + tidak terdorong */}
+                <p className="text-sm text-gray-600 whitespace-nowrap ">
+                  BCA {x.bank}
+                </p>
               </div>
 
               <button
                 onClick={() => copy(x.bank)}
-                className="bg-gray-400 text-white px-3 py-1 rounded-md text-sm cursor-pointer"
+                className="bg-gray-400 text-white px-3 py-1 rounded-md text-sm cursor-pointer flex-shrink-0"
               >
                 Copy
               </button>

@@ -73,7 +73,9 @@ export default function BrideGroom() {
           <div className="relative z-10 flex flex-col items-center text-center px-6 py-10">
 
             {/* TITLE */}
-            <h2 className="text-5xl font-serif italic text-gray-800 mb-2">
+            <h2 className="text-5xl font-serif italic text-gray-800 mb-2"
+                style={{ fontFamily: "Bailenson, sans-serif" }}>
+
               Bride & Groom
             </h2>
             <p className="text-gray-700 text-sm mb-6">
@@ -95,16 +97,19 @@ export default function BrideGroom() {
             <h3 className="mt-6 text-2xl font-serif italic text-gray-800">
               Asri Cikita Putri, S.Ds.
             </h3>
-            <p className="text-gray-600 text-sm font-semibold">
+            <p className="text-gray-700 text-lg font-semibold">The Daughter of</p>
+            <p className="text-gray-600 text-sm font-semibold mt-2">
               Drs. Agus Milad Jamal
             </p>
-            <p className="text-gray-600 text-sm font-semibold">&</p>
+            <p className="text-gray-600 text-sm font-semibold"
+            >&</p>
             <p className="text-gray-600 text-sm font-semibold">
               Drg. Rita Febriyanti
             </p>
 
             {/* Separator */}
-            <h2 className="text-5xl font-serif italic text-gray-800 mt-10">&</h2>
+            <h2 className="text-5xl text-gray-800 mt-10"
+            style={{ fontFamily: "Bailenson, sans-serif" }}>&</h2>
 
             {/* === GROOM PHOTO === */}
             <div className="relative w-56 h-72 mx-auto overflow-hidden rounded-full border border-gray-400 shadow-lg mt-10">
@@ -122,8 +127,8 @@ export default function BrideGroom() {
               Arief Rachman Nugraha, S.T.
             </h3>
 
-            <p className="text-gray-700 text-lg">The Son of</p>
-            <p className="text-gray-600 text-sm font-semibold">Madih, S.Sos</p>
+            <p className="text-gray-700 text-lg font-semibold">The Son of</p>
+            <p className="text-gray-600 text-sm font-semibold mt-2">Madih, S.Sos</p>
             <p className="text-gray-600 text-sm font-semibold">&</p>
             <p className="text-gray-600 text-sm font-semibold">
               Suminar, S.Pd
