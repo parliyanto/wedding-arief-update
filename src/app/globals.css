@@ -67,4 +67,11 @@ body {
   background: rgba(0, 0, 0, 0.6);
 }
 
+@keyframes softglow {
+  0% { opacity: .4; transform: scale(0.92); }
+  50% { opacity: .9; transform: scale(1.02); }
+ 100% { opacity: .4; transform: scale(0.92); }
+}
+
+
 

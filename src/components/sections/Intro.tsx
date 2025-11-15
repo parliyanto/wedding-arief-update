@@ -5,26 +5,33 @@ import { useEffect, useState } from "react";
 export default function Intro() {
   const [showText, setShowText] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
-
-  // DETIK setelah frame abu-abu lewat → text muncul
-  const THRESHOLD = 15; // bisa kamu ubah ke 3 detik kalau mau lebih lambat
+  const [showScroll, setShowScroll] = useState(false);  // NEW
+  const THRESHOLD = 15;
 
   const handlePlay = () => {
-    // Video mulai berjalan → tandai sebagai ready
     setVideoReady(true);
   };
 
   const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const v = e.currentTarget;
 
-    if (!videoReady) return;                 // pastikan video sudah benar-benar play
-    if (isNaN(v.currentTime)) return;        // anti bug next.js timeupdate
+    if (!videoReady) return;
+    if (isNaN(v.currentTime)) return;
 
-    // FRAME sudah lewat 2.2 detik → munculkan text
     if (v.currentTime >= THRESHOLD && !showText) {
       setShowText(true);
+      setTimeout(() => setShowScroll(true), 600); // Delay biar smooth
     }
   };
+
+  // HILANGKAN ICON saat user mulai scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) setShowScroll(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <section className="relative flex items-center justify-center h-screen bg-black overflow-hidden">
@@ -39,7 +46,6 @@ export default function Intro() {
         onTimeUpdate={handleTimeUpdate}
       />
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
 
       {/* TEXT */}
@@ -56,6 +62,24 @@ export default function Intro() {
         <h1 className="text-7xl font-serif italic">Arief</h1>
         <p className="mt-5 text-xl font-medium">07 · 12 · 25</p>
       </div>
+
+      {/* SCROLL INDICATOR */}
+      {showScroll && (
+        <div className="absolute bottom-32 sm:bottom-14 flex justify-center w-full z-30 animate-bounce">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-8 h-8 text-white opacity-80"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" 
+              d="M19 14l-7 7-7-7m14-5l-7 7-7-7" 
+            />
+          </svg>
+        </div>
+      )}
     </section>
   );
 }

@@ -61,6 +61,11 @@ export default function Wishes() {
     }
   };
 
+  const hasUrlName =
+  typeof window !== "undefined" &&
+  !!new URL(window.location.href).searchParams.get("guest_name");
+
+
   return (
     <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12 overflow-hidden">
 
@@ -109,10 +114,13 @@ export default function Wishes() {
         <form onSubmit={submitWish} className="space-y-4">
           <input
             value={name}
-            readOnly
+            onChange={(e) => {
+              if (!hasUrlName) setName(e.target.value);
+            }}
+            readOnly={hasUrlName}
+            placeholder="Masukkan Nama Anda"
             className="w-full border border-black bg-gray-100 rounded-md px-4 py-2 text-black"
           />
-
           <textarea
             rows={4}
             maxLength={500}

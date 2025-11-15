@@ -81,11 +81,15 @@ function CoverContent({ onOpen }: CoverProps) {
         <p className="text-lg mb-2">Dear,</p>
         <p className="text-2xl font-semibold">{guestName}</p>
         <button
-          onClick={onOpen}
-          className="mt-6 px-6 py-3 border-2 border-white rounded-full shadow-lg hover:scale-105 transition"
+          onClick={() => {
+            window.dispatchEvent(new Event("start-music"));  // <-- TRIGGER MUSIK
+            onOpen();                                        // <-- buka undangan
+          }}
+          className="mt-6 px-6 py-3 border-2 border-white rounded-full shadow-lg hover:scale-105 transition cursor-pointer"
         >
           Open Invitation
         </button>
+
       </div>
     </section>
   );

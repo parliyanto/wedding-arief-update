@@ -56,6 +56,10 @@ export default function CountdownRsvp() {
     return () => clearInterval(interval);
   }, []);
 
+  const hasUrlName = typeof window !== "undefined" &&
+  !!new URL(window.location.href).searchParams.get("guest_name");
+
+
   // ==== FETCH RSVP DATA ====
   useEffect(() => {
     if (!guestName) return;
@@ -159,53 +163,69 @@ export default function CountdownRsvp() {
         <div className="bg-white shadow-lg p-6 text-center rounded-b-2xl">
           {!rsvpData ? (
             <form onSubmit={submitRSVP} className="space-y-4">
-              <input
-                value={guestName}
-                readOnly
-                className="w-full border rounded-lg p-2 text-black bg-gray-100"
-              />
 
-              <select
-                value={attend}
-                onChange={(e) => setAttend(e.target.value)}
-                className="w-full border rounded-lg p-2 text-black"
-              >
-                <option value="">Will you attend?</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
+              {/* === INPUT NAME === */}
+              {/* === INPUT NAME === */}
+        <input
+          value={guestName}
+          onChange={(e) => {
+            if (!hasUrlName) setGuestName(e.target.value); 
+          }}
+          readOnly={hasUrlName}
+          placeholder="Masukkan Nama Anda"
+          className="w-full border rounded-lg p-2 text-black bg-gray-100"
+        />
 
-              <input
-                type="number"
-                placeholder="Amount of Guest"
-                value={guestCount}
-                onChange={(e) => setGuestCount(e.target.value)}
-                className="w-full border rounded-lg p-2 text-black"
-              />
 
-              <button
-                type="submit"
-                className="bg-gray-600 text-white px-6 py-2 w-full rounded-lg"
-              >
-                Submit
-              </button>
-            </form>
-          ) : (
-            <>
-              <h2 className="text-2xl font-serif italic text-gray-800 mb-3">
-                THANK YOU 💖
-              </h2>
-              <p className="text-gray-700 mb-2">
-                Dear <strong>{rsvpData.name}</strong>,
-              </p>
+      {/* === SELECT ATTEND === */}
+      <select
+        value={attend}
+        onChange={(e) => setAttend(e.target.value)}
+        className="w-full border rounded-lg p-2 text-black"
+      >
+        <option value="">Will you attend?</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
 
-              <div className="mt-4 bg-gray-500 rounded-lg p-4 text-left text-white">
-                <p><strong>Status:</strong> {rsvpData.status}</p>
-                <p><strong>Guest Count:</strong> {rsvpData.guest_count}</p>
-              </div>
-            </>
-          )}
-        </div>
+      {/* === GUEST COUNT === */}
+      <input
+        type="number"
+        placeholder="Amount of Guest"
+        value={guestCount}
+        onChange={(e) => setGuestCount(e.target.value)}
+        className="w-full border rounded-lg p-2 text-black"
+      />
+
+      {/* === SUBMIT === */}
+      <button
+        type="submit"
+        className="bg-gray-600 text-white px-6 py-2 w-full rounded-lg cursor-pointer"
+      >
+        Submit
+      </button>
+    </form>
+  ) : (
+    <div className="flex flex-col items-center justify-center py-8">
+      <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md border rounded-xl px-5 py-4 shadow-lg">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6 text-green-600"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+
+        <p className="text-gray-800 font-medium text-sm">
+          Thank you for confirming your presence.
+        </p>
+      </div>
+    </div>
+  )}
+</div>
       </div>
     </section>
   );
