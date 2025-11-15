@@ -64,7 +64,7 @@ export default function Gift() {
           ))}
 
           {copied && (
-            <div className="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
+            <div className="fixed bottom-5 right-5 bg-white text-black px-4 py-2 rounded-lg shadow-lg">
               Nomor rekening berhasil disalin!
             </div>
           )}
