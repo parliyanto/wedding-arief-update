@@ -132,7 +132,7 @@ export default function Wishes() {
 
         {!checking && hasSubmitted && (
           <p className="text-xl font-semibold text-gray-900 py-10">
-            Thank you for confirming your presence 💖
+            Thank you for your beautiful message 💖
           </p>
         )}
 
@@ -190,10 +190,10 @@ export default function Wishes() {
   {/* === HEADER (TIDAK IKUT SCROLL) === */}
   <div className="flex items-center justify-between mb-3 px-1">
     <h3
-      className="text-xl font-semibold text-white"
+      className="text-xl text-white"
       style={{ fontFamily: "Bailenson, sans-serif" }}
     >
-      Ucapan & Doa Para Tamu
+      Wishes from Our Guests
     </h3>
 
     <span
@@ -205,7 +205,7 @@ export default function Wishes() {
         shadow-sm
       "
     >
-      ({wishes.length}) Ucapan
+      {wishes.length} Wishes
     </span>
   </div>
 
