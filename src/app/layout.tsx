@@ -6,6 +6,13 @@ export const metadata = {
   title: "Wedding Invitation | Asri & Arief",
   openGraph: {
     title: "Wedding Invitation | Asri & Arief",
+    images: [
+      {
+        url: "https://weddingbride-asrief.vercel.app/og-image.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 
