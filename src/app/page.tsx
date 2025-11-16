@@ -1,9 +1,12 @@
-import Invitation from "@/components/Invitation"; // ✅ wrapper
+import { Suspense } from "react";
+import Invitation from "@/components/Invitation";
 
 export default function Home() {
   return (
     <main>
-      <Invitation />   {/* ✅ sudah handle Cover + Detail */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Invitation />
+      </Suspense>
     </main>
   );
 }
