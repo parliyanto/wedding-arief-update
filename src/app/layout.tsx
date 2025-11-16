@@ -3,8 +3,10 @@ import { ReactNode } from "react";
 import MusicPlayer from "@/components/music/MusicPlayer";
 
 export const metadata = {
-  title: "Undangan Pernikahan",
-  description: "Undangan pernikahan digital",
+  title: "Wedding Invitation | Asri & Arief",
+  openGraph: {
+    title: "Wedding Invitation | Asri & Arief",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
