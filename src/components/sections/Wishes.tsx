@@ -11,18 +11,22 @@ export default function Wishes() {
   const [toast, setToast] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [checking, setChecking] = useState(true);
+  const [hasUrlName, setHasUrlName] = useState(false); // 🔥 FIX UTAMA
 
   // === Ambil nama dari URL ===
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const param = new URL(window.location.href).searchParams.get("guest_name");
+
     if (param) {
       const formatted = param
         .split(" ")
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
         .join(" ");
+
       setName(formatted);
+      setHasUrlName(true); // 🔥 TANPA INI bg-gray tidak muncul
     }
   }, []);
 
@@ -36,7 +40,7 @@ export default function Wishes() {
     if (data) setWishes(data);
   };
 
-  // === Cek apakah user ini sudah pernah submit ===
+  // === Cek apakah user ini sudah submit ===
   const checkIfSubmitted = async () => {
     if (!name) return;
 
@@ -65,26 +69,24 @@ export default function Wishes() {
     return () => clearTimeout(t);
   }, [toast]);
 
-  // === Submit ===
+  // === Submit wish ===
   const submitWish = async (e: any) => {
     e.preventDefault();
     if (!name || !message) return setToast("Please fill all fields");
 
-    const { error } = await supabase.from("best_wishes").insert([
-      { name, message }
-    ]);
+    const { error } = await supabase
+      .from("best_wishes")
+      .insert([{ name, message }]);
 
     if (!error) {
       setMessage("");
       setToast("Thank you for your beautiful wish!");
       setHasSubmitted(true);
-      fetchWishes();
+
+      await fetchWishes();
+      setWishes((prev) => [...prev]); // paksa rerender
     }
   };
-
-  const hasUrlName =
-    typeof window !== "undefined" &&
-    !!new URL(window.location.href).searchParams.get("guest_name");
 
   return (
     <section className="relative flex flex-col items-center justify-center min-h-screen px-4 py-12 overflow-hidden">
@@ -116,7 +118,7 @@ export default function Wishes() {
 
       <div className="absolute inset-0 bg-black/40 -z-10"></div>
 
-      {/* === CARD WISH FORM === */}
+      {/* === FORM CARD === */}
       <div className="relative z-10 w-full max-w-lg text-center bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg">
 
         <h2
@@ -130,7 +132,7 @@ export default function Wishes() {
           <p className="text-gray-700">Checking your invitation...</p>
         )}
 
-        {!checking && hasSubmitted && (
+        {(!checking && hasSubmitted) && (
           <p className="text-xl font-semibold text-gray-900 py-10">
             Thank you for your beautiful message 💖
           </p>
@@ -141,22 +143,31 @@ export default function Wishes() {
             <p className="text-gray-700 mb-8">Leave your beautiful message 💖</p>
 
             <form onSubmit={submitWish} className="space-y-4">
+
+              {/* === INPUT NAME === */}
               <input
                 value={name}
+                readOnly={hasUrlName}
                 onChange={(e) => {
                   if (!hasUrlName) setName(e.target.value);
                 }}
-                readOnly={hasUrlName}
                 placeholder="Masukkan Nama Anda"
-                className="w-full border border-black bg-gray-100 rounded-md px-4 py-2 text-black"
+                className={`
+                  w-full rounded-md px-4 py-2 
+                  ${hasUrlName
+                    ? "bg-gray-300 border border-gray-400 text-black cursor-not-allowed opacity-80"
+                    : "bg-white border border-black text-black"
+                  }
+                `}
               />
+
               <textarea
                 rows={4}
                 maxLength={500}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Your best wishes"
-                className="w-full border border-black rounded-md px-4 py-2 text-black"
+                className="w-full border border-black rounded-md px-4 py-2 text-black bg-white"
               ></textarea>
 
               <button className="bg-gray-800 text-white px-6 py-2 rounded-md w-full hover:bg-gray-900 cursor-pointer">
@@ -166,6 +177,7 @@ export default function Wishes() {
           </>
         )}
 
+        {/* === TOAST === */}
         {toast && (
           <div className="fixed top-6 right-6 bg-white/80 backdrop-blur-md border border-gray-300 text-gray-800 px-4 py-2 rounded-xl shadow-lg animate-fade-in-up z-[9999]">
             {toast}
@@ -183,54 +195,53 @@ export default function Wishes() {
         `}</style>
       </div>
 
-      {/* === LIST WISHES WRAPPER === */}
-<div
-  className="relative z-10 w-full max-w-lg mt-4 bg-white/20 backdrop-blur-md rounded-xl p-4 shadow-xl border border-white/30"
->
-  {/* === HEADER (TIDAK IKUT SCROLL) === */}
-  <div className="flex items-center justify-between mb-3 px-1">
-    <h3
-      className="text-xl text-white"
-      style={{ fontFamily: "Bailenson, sans-serif" }}
-    >
-      Wishes from Our Guests
-    </h3>
+      {/* === LIST WISHES === */}
+      <div className="relative z-10 w-full max-w-lg mt-4 bg-white/20 backdrop-blur-md rounded-xl p-4 shadow-xl border border-white/30">
 
-    <span
-      className="
-        text-sm font-semibold text-white 
-        border border-white/50 
-        px-3 py-1 rounded-full 
-        bg-white/10 backdrop-blur-md 
-        shadow-sm
-      "
-    >
-      {wishes.length} Wishes
-    </span>
-  </div>
+        {/* Header */}
+        <div className="flex items-center justify-between mb-3 px-1">
+          <h3
+            className="text-1xl text-white italic font-semibold underline"
+          >
+            Wishes from Our Guests
+          </h3>
 
-  {/* === LIST BODY (HANYA INI YANG SCROLL) === */}
-  <div
-    className="space-y-4 overflow-y-auto scroll-smooth pr-1"
-    style={{
-      maxHeight: "260px",
-      scrollbarWidth: "thin"
-    }}
-  >
-    {wishes.map((w) => (
-      <div
-        key={w.id}
-        className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow"
-      >
-        <p className="font-semibold text-gray-900">{w.name}</p>
-        <p className="text-gray-800">{w.message}</p>
-        <p className="text-xs text-gray-600">
-          {new Date(w.created_at).toLocaleString("id-ID")}
-        </p>
+          <span
+            className="
+              text-sm font-bold text-white 
+              border border-white/50 
+              px-3 py-1 rounded-full 
+              bg-white/10 backdrop-blur-md 
+              shadow-sm
+            "
+          >
+          {wishes.length} Wishes
+          </span>
+        </div>
+
+        {/* List */}
+        <div
+          className="space-y-4 overflow-y-auto scroll-smooth pr-1"
+          style={{
+            maxHeight: "260px",
+            scrollbarWidth: "thin"
+          }}
+        >
+          {wishes.map((w) => (
+            <div
+              key={w.id}
+              className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow"
+            >
+              <p className="font-semibold text-gray-900">{w.name}</p>
+              <p className="text-gray-800">{w.message}</p>
+              <p className="text-xs text-gray-600">
+                {new Date(w.created_at).toLocaleString("id-ID")}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
+
     </section>
   );
 }

@@ -35,22 +35,21 @@
             <div>
               <h3 className="text-3xl font-serif italic mb-2">First Meeting</h3>
               <p className="text-sm leading-relaxed">
-                Our first hello was through a dating app. What started as a simple
-                chat slowly grew into something comforting...
+                Our first hello was through a dating app. What started as a simple chat slowly grew into something comforting. Guided by prayers and a little courage we decided to put this relationship into something real.
               </p>
             </div>
 
             <div>
               <h3 className="text-3xl font-serif italic mb-2">Together as One</h3>
               <p className="text-sm leading-relaxed">
-                As our hearts grew closer, we introduced each other to our families...
+                As our hearts grew closer, we introduced each other to our families. It was our way of showing that this love was meant to be taken seriously.
               </p>
             </div>
 
             <div>
               <h3 className="text-3xl font-serif italic mb-2">Our Promise</h3>
               <p className="text-sm leading-relaxed mb-10">
-                Despite our differences and challenges, we still choose to nurture this love...
+                Despite our differences and challenges, we still choose to nurture this love together. Now we begin a new chapter filled with love, faith, purpose, and a life-long promise.
               </p>
             </div>
           </div>
