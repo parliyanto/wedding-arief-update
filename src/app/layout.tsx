@@ -8,7 +8,7 @@ export const metadata = {
     title: "Wedding Invitation | Asri & Arief",
     images: [
       {
-        url: "https://wedding-asrief.vercel.app/og-image.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
       },
