@@ -75,7 +75,12 @@ export default function Intro() {
 
       {/* SCROLL INDICATOR */}
       {showScroll && (
-        <div className="absolute bottom-38 sm:bottom-14 flex justify-center w-full z-30 animate-bounce">
+        <div className="absolute bottom-38 sm:bottom-14 flex justify-center w-full z-30 animate-bounce"
+         onClick={() => {
+          const el = document.getElementById("next-section");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-8 h-8 text-white opacity-80"

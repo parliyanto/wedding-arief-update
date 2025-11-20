@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Quote() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 bg-[#7b8994] overflow-hidden">
+    <section id="next-section" className="relative min-h-screen flex items-center justify-center px-4 bg-[#7b8994] overflow-hidden">
 
       {/* === BACKGROUND (Optimized) === */}
       <div className="absolute inset-0">

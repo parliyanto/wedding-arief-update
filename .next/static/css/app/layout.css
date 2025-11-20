@@ -7,7 +7,6 @@
 @layer theme {
   :root, :host {
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-    --color-amber-300: oklch(87.9% 0.169 91.605);
     --color-green-600: oklch(62.7% 0.194 149.214);
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
@@ -984,9 +983,6 @@
   }
   .text-\[\#ffb5b5\] {
     color: #ffb5b5;
-  }
-  .text-amber-300 {
-    color: var(--color-amber-300);
   }
   .text-black {
     color: var(--color-black);
