@@ -41,7 +41,7 @@ export default function Intro() {
         autoPlay
         muted
         playsInline
-        preload="auto"
+        preload="none"
         onPlay={handlePlay}
         onTimeUpdate={handleTimeUpdate}
       />
