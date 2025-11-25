@@ -30,6 +30,14 @@ export default function Wishes() {
     }
   }, []);
 
+  useEffect(() => {
+  if (!hasUrlName && !name) {
+    setChecking(false);
+  }
+}, [name, hasUrlName]);
+
+
+
   // === Ambil semua wishes ===
   const fetchWishes = async () => {
     const { data } = await supabase
@@ -42,7 +50,10 @@ export default function Wishes() {
 
   // === Cek apakah user ini sudah submit ===
   const checkIfSubmitted = async () => {
-    if (!name) return;
+    if (!name) {
+      setChecking(false);
+      return;
+    }
 
     const { data } = await supabase
       .from("best_wishes")
@@ -96,23 +107,13 @@ export default function Wishes() {
         <div className="absolute inset-0 bg-[#7b8994]" />
 
         <Image
-          src="/ASSET-BG.png"
+          src="/ASSET-BG.webp"
           alt="pattern"
           fill
-          quality={55}
+          // quality={55}
           sizes="100vw"
           loading="lazy"
           className="object-contain opacity-20"
-        />
-
-        <Image
-          src="/ASSET-BG.png"
-          alt="pattern blur"
-          fill
-          quality={22}
-          sizes="100vw"
-          loading="lazy"
-          className="object-cover opacity-10 blur-sm"
         />
       </div>
 

@@ -9,24 +9,19 @@ export default function BrideGroom() {
 
       {/* === BUTTERFLY LAYER (Optimized GIF loading) === */}
       <div className="absolute inset-0 z-10 pointer-events-none select-none">
-        <Image
-          src="/Butterfly_fly.gif"
-          alt="Butterfly"
-          width={400}
-          height={400}
-          loading="lazy"
-          className="absolute opacity-40 animate-float-slow"
-          style={{ top: "10%", left: "5%" }}
-        />
-        <Image
-          src="/Butterfly.gif"
-          alt="Butterfly"
-          width={300}
-          height={300}
-          loading="lazy"
-          className="absolute opacity-40 animate-float-reverse"
-          style={{ bottom: "10%", right: "5%" }}
-        />
+      <img
+        src="/Butterfly_fly.gif"
+        alt=""
+        className="absolute opacity-40 animate-float-slow pointer-events-none"
+        style={{ top: "10%", left: "5%", width: "400px" }}
+      />
+
+      <img
+        src="/Butterfly.gif"
+        alt=""
+        className="absolute opacity-40 animate-float-reverse pointer-events-none"
+        style={{ bottom: "10%", right: "5%", width: "300px" }}
+      />
       </div>
 
       {/* === BACKGROUND (Optimized) === */}
@@ -54,19 +49,6 @@ export default function BrideGroom() {
         viewport={{ once: true }}
       >
         <div className="relative bg-transparent rounded-[100px] shadow-xl overflow-hidden mt-10 mx-auto w-[90%] max-w-sm">
-
-          {/* ARCHITECTURE BG */}
-          <div className="absolute inset-0 -z-10">
-            <Image
-              src="/ASSET-ARCHITECTURE-5.webp"
-              alt="Arch pattern"
-              fill
-              sizes="100vw"
-              loading="lazy"
-              quality={55}
-              className="object-cover opacity-20"
-            />
-          </div>
 
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 to-white/90 -z-10"></div>
 

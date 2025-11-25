@@ -128,8 +128,6 @@ export default function CountdownRsvp() {
               alt="RSVP header"
               fill
               quality={65}
-              placeholder="blur"
-              blurDataURL="/blur-placeholder.png"
               loading="lazy"
               className="object-cover"
             />

@@ -1,52 +1,47 @@
 "use client";
 
-import {  useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 
-type CoverProps = {
-  onOpen: () => void;
-};
+type CoverProps = { onOpen: () => void };
 
 export default function Cover({ onOpen }: CoverProps) {
-  return (
-    <CoverContent onOpen={onOpen} />
-  );
+  return <CoverContent onOpen={onOpen} />;
 }
 
 function CoverContent({ onOpen }: CoverProps) {
-  const [guestName, setGuestName] = useState<string>("");
-  const searchParams = useSearchParams();
+  const [guestName, setGuestName] = useState("");
 
-  // === Ambil nama tamu dari URL ===
   useEffect(() => {
-    const guestNameParam = searchParams.get("guest_name");
-    const isPartner = searchParams.get("partner") === "true";
+    if (typeof window === "undefined") return;
 
-    const formattedName = guestNameParam
-      ? guestNameParam
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get("guest_name");
+    const isPartner = params.get("partner") === "true";
+
+    const formatted = raw
+      ? raw
           .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
           .join(" ")
       : "";
 
-    const finalName = isPartner ? `${formattedName} & Partner` : formattedName;
-    setGuestName(finalName);
-  }, [searchParams]);
-
+    setGuestName(isPartner ? `${formatted} & Partner` : formatted);
+  }, []);
 
   return (
-    <section
-      className="absolute inset-0 flex flex-col justify-center items-center gap-10 text-white text-center bg-cover bg-center px-4">
-         <Image
-            src="/BG-match.webp"
-            alt="bg"
-            fill
-            priority
-            className="object-cover z-[-1]"
-          />
-      <div className="absolute inset-0 bg-black/50"></div>
+    <section className="fixed inset-0 flex flex-col justify-center items-center gap-10 text-white text-center px-4">
 
+      {/* Background */}
+      <div
+        className="absolute inset-0 z-[-1] bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/BG-match.webp')",
+        }}
+      />
+
+      <div className="absolute inset-0 bg-black/50 z-[-1]" />
+
+      {/* Title */}
       <div className="relative z-10 mt-8">
         <h2 className="text-4xl sm:text-5xl font-serif italic text-[#ffb5b5]">
           It’s a Match!
@@ -56,30 +51,31 @@ function CoverContent({ onOpen }: CoverProps) {
         </p>
       </div>
 
+      {/* Photos */}
       <div className="relative z-10 flex gap-6 mt-4">
         <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-lg">
-          <Image
+          <img
             src="/Asri.webp"
             alt="Asri"
-            width={144}
-            height={144}
-            className="rounded-full object-cover"
+            className="w-full h-full object-cover aspect-square"
+            loading="lazy"
           />
         </div>
         <div className="w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-lg">
-          <Image
+          <img
             src="/Arief.webp"
             alt="Arief"
-            width={144}
-            height={144}
-            className="object-cover"
+            className="w-full h-full object-cover aspect-square"
+            loading="lazy"
           />
         </div>
       </div>
 
+      {/* Guest */}
       <div className="relative z-10 mt-6 mb-8">
         <p className="text-lg mb-2">Dear,</p>
-        <p className="text-2xl font-semibold">{guestName}</p>
+        <p className="text-2xl font-semibold min-h-[32px]">{guestName}</p>
+
         <button
           onClick={() => {
             window.dispatchEvent(new Event("start-music"));

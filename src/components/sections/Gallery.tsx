@@ -34,7 +34,7 @@ export default function Gallery() {
       {/* === BACKGROUND PATTERN === */}
       <div
         className="absolute inset-0 opacity-20 bg-[length:300px] bg-repeat z-0"
-        style={{ backgroundImage: "url('/ASSET-BG.png')" }}
+        style={{ backgroundImage: "url('/ASSET-BG.webp')" }}
       />
 
       <div className="relative z-10 w-full max-w-4xl text-center">
@@ -59,6 +59,7 @@ export default function Gallery() {
               controls
               playsInline
               preload="none"
+              poster="cover.png"
             />
           </div>
         </motion.div>
